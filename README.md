@@ -133,9 +133,6 @@ API Integration: Set up your backend API endpoint in api_service.dart.
 Location Services: Ensure location permissions are handled properly on both Android and iOS.
 🤝 Contributing
 We welcome contributions to improve the app. Please check out our contribution guidelines to get started.
-
-📄 License
-This project is licensed under the MIT License. See the LICENSE file for more details.
-
+]
 Feel free to modify this README to fit the specifics of your project. If you have any questions or need assistance, don't hesitate to reach out!
 
