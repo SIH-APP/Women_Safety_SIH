@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'HomeViewModel.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -64,6 +65,7 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   buildCategoryItem(context, 'Detector', isSelected: true),
+                  buildCategoryItem(context, 'Emergency'),
                   buildCategoryItem(context, 'Location'),
                   buildCategoryItem(context, 'Live Tracking'),
                 ],
