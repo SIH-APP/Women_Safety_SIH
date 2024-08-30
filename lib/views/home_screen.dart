@@ -66,6 +66,8 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   buildCategoryItem(context, 'Detector', isSelected: true),
                   buildCategoryItem(context, 'Emergency'),
+
+                  
                   buildCategoryItem(context, 'Location'),
                   buildCategoryItem(context, 'Live Tracking'),
                 ],
