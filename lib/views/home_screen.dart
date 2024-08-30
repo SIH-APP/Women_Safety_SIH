@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'HomeViewModel.dart';
+import 'SettingsScreen.dart';
+import 'live_tracking_screen.dart';
+import 'notification_screen.dart'; // Import the LiveTrackingScreen
 
 class HomeScreen extends StatelessWidget {
   final HomeViewModel viewModel = HomeViewModel();
@@ -20,8 +23,6 @@ class HomeScreen extends StatelessWidget {
           onPressed: () {
             _scaffoldKey.currentState?.openDrawer();
           },
-
-          
         ),
         title: Row(
           children: [
@@ -68,7 +69,15 @@ class HomeScreen extends StatelessWidget {
                   buildCategoryItem(context, 'Detector', isSelected: true),
                   buildCategoryItem(context, 'Emergency'),
                   buildCategoryItem(context, 'Location'),
-                  buildCategoryItem(context, 'Live Tracking'),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LiveTrackingScreen()),
+                      );
+                    },
+                    child: buildCategoryItem(context, 'Live Tracking', isSelected: true),
+                  ),
                 ],
               ),
               SizedBox(height: 20),
@@ -155,24 +164,26 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            buildDrawerItem(Icons.edit, "Edit Profile"),
-            buildDrawerItem(Icons.lock, "SOS Enable"),
-            buildDrawerItem(Icons.vpn_key, "Change Password"),
-            buildDrawerItem(Icons.notifications, "Notifications"),
-            buildDrawerItem(Icons.settings, "Profile Settings"),
-            buildDrawerItem(Icons.logout, "Logout"),
+            buildDrawerItem(context, Icons.edit, "Edit Profile"),
+            buildDrawerItem(context, Icons.lock, "SOS Enable"),
+            buildDrawerItem(context, Icons.vpn_key, "Change Password"),
+            buildDrawerItem(context, Icons.notifications, "Notifications", '/notifications'),
+            buildDrawerItem(context, Icons.settings, "Profile Settings"),
+            buildDrawerItem(context, Icons.logout, "Logout"),
           ],
         ),
       ),
     );
   }
 
-  Widget buildDrawerItem(IconData icon, String title) {
+  Widget buildDrawerItem(BuildContext context, IconData icon, String title, [String? route]) {
     return ListTile(
       leading: Icon(icon, color: Colors.redAccent),
       title: Text(title, style: TextStyle(color: Colors.white)),
       onTap: () {
-        // Handle drawer item tap
+        if (route != null) {
+          Navigator.pushNamed(context, route);
+        }
       },
     );
   }
@@ -316,13 +327,19 @@ class HomeScreen extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.notifications, color: Colors.white),
               onPressed: () {
-                Navigator.pushNamed(context, '/notifications');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => NotificationScreen()),
+                );
               },
             ),
             IconButton(
               icon: Icon(Icons.person, color: Colors.white),
               onPressed: () {
-                // Navigate to Profile
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SettingsScreen()),
+                );
               },
             ),
           ],

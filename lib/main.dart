@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:saahasini/views/home_screen.dart';
+import 'package:saahasini/views/live_tracking_screen.dart';
 import 'package:saahasini/views/notification_screen.dart';
 
 void main() {
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => HomeScreen(),
         '/notifications': (context) => NotificationScreen(),
+        '/live-tracking': (context) => LiveTrackingScreen(),  // Add this route
       },
     );
   }
