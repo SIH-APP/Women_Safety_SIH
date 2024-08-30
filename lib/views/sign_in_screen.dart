@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:saahasini/views/home_screen.dart';
 import '../viewmodels/auth_viewmodel.dart';
 import '../widgets/custom_text_field.dart';
-import '../widgets/custom_button.dart';
 
 class SignUpScreen extends StatelessWidget {
   final AuthViewModel viewModel;
@@ -27,7 +26,7 @@ class SignUpScreen extends StatelessWidget {
                 SizedBox(height: 40),
                 Center(
                   child: Text(
-                    'WOMEN SAFETY',
+                    ' SAAHASINI',
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
@@ -72,10 +71,10 @@ class SignUpScreen extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          // Handle Facebook sign-up
+                          // Handle WhatsApp sign-up
                         },
-                        icon: Icon(Icons.facebook, color: Colors.blue),
-                        label: Text('Facebook'),
+                        icon: Icon(Icons.chat, color: Colors.green),
+                        label: Text('WhatsApp'),
                       ),
                     ),
                     SizedBox(width: 20),
@@ -141,15 +140,49 @@ class SignUpScreen extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 30),
-                CustomButton(
-                  text: 'Sign Up',
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
-                    );
-                    // Handle sign-up logic
-                  },
+                // Updated Sign Up Button
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.deepOrangeAccent, Colors.orangeAccent],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(30),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.orangeAccent.withOpacity(0.5),
+                        offset: Offset(0, 10),
+                        blurRadius: 10,
+                      ),
+                    ],
+                  ),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                      );
+                      // Handle sign-up logic
+                    },
+                    child: Text(
+                      'Sign Up',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
                 SizedBox(height: 20),
                 Center(

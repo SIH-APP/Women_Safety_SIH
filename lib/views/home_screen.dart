@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'HomeViewModel.dart';
+import '../viewmodels/navigation_viewmodel.dart';
 import 'SettingsScreen.dart';
 import 'live_tracking_screen.dart';
-import 'notification_screen.dart'; // Import the LiveTrackingScreen
+import 'notification_screen.dart';
+import 'HomeViewModel.dart';
+import 'custom_navigation_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   final HomeViewModel viewModel = HomeViewModel();
@@ -19,39 +21,51 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.black,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.menu, color: Colors.white),
+          icon: Image.asset(
+            'assets/images/menu_icon.png', // Assuming a menu icon image is provided
+            color: Colors.white,
+          ),
           onPressed: () {
             _scaffoldKey.currentState?.openDrawer();
           },
         ),
         title: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              'HELLO, ',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              'NAINA',
-              style: TextStyle(
-                color: Colors.redAccent,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'HELLO,',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  'NAINA',
+                  style: TextStyle(
+                    color: Colors.redAccent,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
             SizedBox(width: 10),
-            Icon(Icons.waving_hand, color: Colors.white, size: 28),
+            Image.asset(
+              'assets/images/hand_wave.png',
+              height: 28,
+            ),
           ],
         ),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: CircleAvatar(
-              backgroundColor: Colors.grey[800],
-              child: Icon(Icons.person, color: Colors.white),
+              backgroundImage: AssetImage('assets/images/avatar.png'),
+              radius: 24,
             ),
           ),
         ],
@@ -63,11 +77,11 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   buildCategoryItem(context, 'Detector', isSelected: true),
-                  buildCategoryItem(context, 'Emergency'),
                   buildCategoryItem(context, 'Location'),
                   GestureDetector(
                     onTap: () {
@@ -94,20 +108,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: SafeArea(
-        child: buildBottomNavigationBar(context),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
-        child: FloatingActionButton(
-          backgroundColor: Colors.redAccent,
-          child: Text('SOS', style: TextStyle(fontWeight: FontWeight.bold)),
-          onPressed: () {
-            // Handle SOS button press
-          },
-        ),
-      ),
+      bottomNavigationBar: CustomNavigationBar(viewModel: NavigationViewModel()),
     );
   }
 
@@ -215,11 +216,11 @@ class HomeScreen extends StatelessWidget {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          buildFeatureCard('Spy Camera Detector', 'assets/images/camera_icon.png', Colors.deepPurpleAccent),
+          buildFeatureCard('Spy Camera Detector', 'assets/images/safety.png', Colors.deepPurpleAccent),
           SizedBox(width: 10),
-          buildFeatureCard('Emergency Contact', 'assets/images/emergency_icon.png', Colors.blueAccent),
+          buildFeatureCard('Emergency Contact', 'assets/images/tracking.png', Colors.blueAccent),
           SizedBox(width: 10),
-          buildFeatureCard('Live Tracking', 'assets/images/tracking_icon.png', Colors.orangeAccent),
+          buildFeatureCard('Live Tracking', 'assets/images/digital.png', Colors.orangeAccent),
         ],
       ),
     );
@@ -262,7 +263,7 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Favourites',
+              'Emergency',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -272,79 +273,23 @@ class HomeScreen extends StatelessWidget {
               onPressed: () {
                 // Handle "See all" press
               },
-              child: Text('See all', style: TextStyle(color: Colors.blue)),
+              child: Text('See all', style: TextStyle(color: Colors.redAccent)),
             ),
           ],
+        ),
+        ListTile(
+          leading: Icon(Icons.phone, color: Colors.redAccent),
+          title: Text('Fake call', style: TextStyle(color: Colors.white)),
         ),
         ListTile(
           leading: Icon(Icons.feedback, color: Colors.redAccent),
           title: Text('Education Feedback', style: TextStyle(color: Colors.white)),
         ),
         ListTile(
-          leading: Icon(Icons.feedback, color: Colors.redAccent),
+          leading: Icon(Icons.code, color: Colors.redAccent),
           title: Text('Code Generation', style: TextStyle(color: Colors.white)),
         ),
       ],
-    );
-  }
-
-  Widget buildBottomNavigationBar(BuildContext context) {
-    return BottomAppBar(
-      shape: CircularNotchedRectangle(),
-      notchMargin: 10,
-      child: Container(
-        height: 70,
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30),
-            topRight: Radius.circular(30),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black54,
-              offset: Offset(0, -1),
-              blurRadius: 10,
-            ),
-          ],
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              icon: Icon(Icons.home, color: Colors.white),
-              onPressed: () {
-                // Navigate to Home
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.list, color: Colors.white),
-              onPressed: () {
-                // Navigate to Articles
-              },
-            ),
-            SizedBox(width: 40), // Space for the FAB
-            IconButton(
-              icon: Icon(Icons.notifications, color: Colors.white),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => NotificationScreen()),
-                );
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.person, color: Colors.white),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SettingsScreen()),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
