@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
-import 'views/sign_in_screen.dart';
-import 'viewmodels/auth_viewmodel.dart';
+import 'package:saahasini/views/home_screen.dart';
+import 'package:saahasini/views/notification_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,13 +10,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Women Safety',
       debugShowCheckedModeBanner: false,
+      title: 'Notification UI',
       theme: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: Colors.deepOrange,
+        primarySwatch: Colors.red,
       ),
-      home: SignUpScreen(viewModel: AuthViewModel()),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomeScreen(),
+        '/notifications': (context) => NotificationScreen(),
+      },
     );
   }
 }

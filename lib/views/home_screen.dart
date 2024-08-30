@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'HomeViewModel.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -21,8 +20,10 @@ class HomeScreen extends StatelessWidget {
           onPressed: () {
             _scaffoldKey.currentState?.openDrawer();
           },
+
+          
         ),
-        title: const Row(
+        title: Row(
           children: [
             Text(
               'HELLO, ',
@@ -66,8 +67,6 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   buildCategoryItem(context, 'Detector', isSelected: true),
                   buildCategoryItem(context, 'Emergency'),
-
-                  
                   buildCategoryItem(context, 'Location'),
                   buildCategoryItem(context, 'Live Tracking'),
                 ],
@@ -87,7 +86,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: SafeArea(
-        child: buildBottomNavigationBar(),
+        child: buildBottomNavigationBar(context),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Padding(
@@ -278,7 +277,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget buildBottomNavigationBar() {
+  Widget buildBottomNavigationBar(BuildContext context) {
     return BottomAppBar(
       shape: CircularNotchedRectangle(),
       notchMargin: 10,
@@ -315,9 +314,9 @@ class HomeScreen extends StatelessWidget {
             ),
             SizedBox(width: 40), // Space for the FAB
             IconButton(
-              icon: Icon(Icons.settings, color: Colors.white),
+              icon: Icon(Icons.notifications, color: Colors.white),
               onPressed: () {
-                // Navigate to Settings
+                Navigator.pushNamed(context, '/notifications');
               },
             ),
             IconButton(
