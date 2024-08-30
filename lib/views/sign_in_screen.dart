@@ -1,338 +1,171 @@
 import 'package:flutter/material.dart';
-import 'HomeViewModel.dart';
-import 'live_tracking_screen.dart';
+import 'package:saahasini/views/home_screen.dart';
+import '../viewmodels/auth_viewmodel.dart';
+import '../widgets/custom_text_field.dart';
+import '../widgets/custom_button.dart';
 
-class HomeScreen extends StatelessWidget {
-  final HomeViewModel viewModel = HomeViewModel();
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+class SignUpScreen extends StatelessWidget {
+  final AuthViewModel viewModel;
 
-  HomeScreen({super.key});
+  SignUpScreen({required this.viewModel});
+
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.menu, color: Colors.white),
-          onPressed: () {
-            _scaffoldKey.currentState?.openDrawer();
-          },
-        ),
-        title: Row(
-          children: [
-            Text(
-              'HELLO, ',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              'NAINA',
-              style: TextStyle(
-                color: Colors.redAccent,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(width: 10),
-            Icon(Icons.waving_hand, color: Colors.white, size: 28),
-          ],
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CircleAvatar(
-              backgroundColor: Colors.grey[800],
-              child: Icon(Icons.person, color: Colors.white),
-            ),
-          ),
-        ],
-      ),
-      drawer: buildDrawer(context),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  buildCategoryItem(context, 'Detector', isSelected: true),
-                  buildCategoryItem(context, 'Emergency'),
-                  buildCategoryItem(context, 'Location'),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LiveTrackingScreen()),
-                      );
-                    },
-                    child: buildCategoryItem(context, 'Live Tracking', isSelected: true),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: 40),
+                Center(
+                  child: Text(
+                    'WOMEN SAFETY',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
-                ],
-              ),
-              SizedBox(height: 20),
-              Expanded(
-                child: ListView(
+                ),
+                SizedBox(height: 30),
+                Center(
+                  child: Text(
+                    'Sign Up',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.deepOrangeAccent,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+                Center(
+                  child: Text(
+                    'Join us to ensure your safety with our robust features.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white54,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    buildFeatureCardScroll(),
-                    SizedBox(height: 20),
-                    buildFavoritesSection(context),
+                    Expanded(
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.black,
+                          backgroundColor: Colors.white,
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                        onPressed: () {
+                          // Handle Facebook sign-up
+                        },
+                        icon: Icon(Icons.facebook, color: Colors.blue),
+                        label: Text('Facebook'),
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                    Expanded(
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.black,
+                          backgroundColor: Colors.white,
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                        onPressed: () {
+                          // Handle Google sign-up
+                        },
+                        icon: Icon(Icons.g_translate, color: Colors.red),
+                        label: Text('Google'),
+                      ),
+                    ),
                   ],
                 ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: SafeArea(
-        child: buildBottomNavigationBar(context),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
-        child: FloatingActionButton(
-          backgroundColor: Colors.redAccent,
-          child: Text('SOS', style: TextStyle(fontWeight: FontWeight.bold)),
-          onPressed: () {
-            // Handle SOS button press
-          },
-        ),
-      ),
-    );
-  }
-
-  Widget buildDrawer(BuildContext context) {
-    return Drawer(
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.black, Colors.grey[900]!],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.redAccent, Colors.black],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+                SizedBox(height: 30),
+                Center(
+                  child: Text(
+                    'Or',
+                    style: TextStyle(color: Colors.white54),
+                  ),
                 ),
-                image: DecorationImage(
-                  image: AssetImage('assets/images/pattern.png'),
-                  fit: BoxFit.cover,
-                  colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.2), BlendMode.dstATop),
+                SizedBox(height: 30),
+                CustomTextField(
+                  label: 'Name',
+                  controller: nameController,
+                  keyboardType: TextInputType.name,
                 ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'SAAHASINI',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
+                SizedBox(height: 20),
+                CustomTextField(
+                  label: 'Email/Phone Number',
+                  controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                SizedBox(height: 20),
+                CustomTextField(
+                  label: 'Password',
+                  controller: passwordController,
+                  isPassword: true,
+                  suffixIcon: Icon(Icons.visibility_off, color: Colors.white54),
+                ),
+                SizedBox(height: 20),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: true,
+                      onChanged: (value) {},
+                      activeColor: Colors.deepOrangeAccent,
+                    ),
+                    Expanded(
+                      child: Text(
+                        'I agree to the terms and conditions',
+                        style: TextStyle(color: Colors.white54),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 30),
+                CustomButton(
+                  text: 'Sign Up',
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                    );
+                    // Handle sign-up logic
+                  },
+                ),
+                SizedBox(height: 20),
+                Center(
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      'I already have an account',
+                      style: TextStyle(color: Colors.deepOrangeAccent),
                     ),
                   ),
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Colors.grey[800],
-                    child: Icon(Icons.person, color: Colors.white, size: 50),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Your Profile',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-            buildDrawerItem(Icons.edit, "Edit Profile"),
-            buildDrawerItem(Icons.lock, "SOS Enable"),
-            buildDrawerItem(Icons.vpn_key, "Change Password"),
-            buildDrawerItem(Icons.notifications, "Notifications"),
-            buildDrawerItem(Icons.settings, "Profile Settings"),
-            buildDrawerItem(Icons.logout, "Logout"),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildDrawerItem(IconData icon, String title) {
-    return ListTile(
-      leading: Icon(icon, color: Colors.redAccent),
-      title: Text(title, style: TextStyle(color: Colors.white)),
-      onTap: () {
-        // Handle drawer item tap
-      },
-    );
-  }
-
-  Widget buildCategoryItem(BuildContext context, String title, {bool isSelected = false}) {
-    return Column(
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-            color: isSelected ? Colors.redAccent : Colors.white,
-            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
           ),
-        ),
-        if (isSelected)
-          Container(
-            margin: EdgeInsets.only(top: 4),
-            height: 2,
-            width: 30,
-            color: Colors.redAccent,
-          )
-      ],
-    );
-  }
-
-  Widget buildFeatureCardScroll() {
-    return SizedBox(
-      height: 180,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: [
-          buildFeatureCard('Spy Camera Detector', 'assets/images/camera_icon.png', Colors.deepPurpleAccent),
-          SizedBox(width: 10),
-          buildFeatureCard('Emergency Contact', 'assets/images/emergency_icon.png', Colors.blueAccent),
-          SizedBox(width: 10),
-          buildFeatureCard('Live Tracking', 'assets/images/tracking_icon.png', Colors.orangeAccent),
-        ],
-      ),
-    );
-  }
-
-  Widget buildFeatureCard(String title, String imagePath, Color color) {
-    return Container(
-      width: 150,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [color.withOpacity(0.8), color],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: color.withOpacity(0.5),
-            offset: Offset(0, 4),
-            blurRadius: 10,
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(imagePath, height: 80, color: Colors.white),
-          SizedBox(height: 10),
-          Text(title, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-        ],
-      ),
-    );
-  }
-
-  Widget buildFavoritesSection(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Favourites',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                // Handle "See all" press
-              },
-              child: Text('See all', style: TextStyle(color: Colors.blue)),
-            ),
-          ],
-        ),
-        ListTile(
-          leading: Icon(Icons.feedback, color: Colors.redAccent),
-          title: Text('Education Feedback', style: TextStyle(color: Colors.white)),
-        ),
-        ListTile(
-          leading: Icon(Icons.feedback, color: Colors.redAccent),
-          title: Text('Code Generation', style: TextStyle(color: Colors.white)),
-        ),
-      ],
-    );
-  }
-
-  Widget buildBottomNavigationBar(BuildContext context) {
-    return BottomAppBar(
-      shape: CircularNotchedRectangle(),
-      notchMargin: 10,
-      child: Container(
-        height: 70,
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30),
-            topRight: Radius.circular(30),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black54,
-              offset: Offset(0, -1),
-              blurRadius: 10,
-            ),
-          ],
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              icon: Icon(Icons.home, color: Colors.white),
-              onPressed: () {
-                // Navigate to Home
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.list, color: Colors.white),
-              onPressed: () {
-                // Navigate to Articles
-              },
-            ),
-            SizedBox(width: 40), // Space for the FAB
-            IconButton(
-              icon: Icon(Icons.notifications, color: Colors.white),
-              onPressed: () {
-                Navigator.pushNamed(context, '/notifications');
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.person, color: Colors.white),
-              onPressed: () {
-                // Navigate to Profile
-              },
-            ),
-          ],
         ),
       ),
     );
