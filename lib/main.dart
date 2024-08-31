@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:saahasini/viewmodels/auth_viewmodel.dart';
+import 'package:saahasini/views/SettingsScreen.dart';
+import 'package:saahasini/views/articleScreen.dart';
 import 'package:saahasini/views/home_screen.dart';
-import 'package:saahasini/views/live_tracking_screen.dart';
 import 'package:saahasini/views/notification_screen.dart';
-import 'package:saahasini/views/sign_in_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,16 +13,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Notification UI',
+      initialRoute: '/home',
+      routes: {
+        '/home': (context) => HomeScreen(),
+        '/notifications': (context) => NotificationScreen(),
+        '/settings': (context) => SettingsScreen(), // Register the SettingsScreen
+        '/articles': (context) => ArticleScreen(), // Example, replace with your actual screen
+      },
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => SignUpScreen(viewModel: AuthViewModel()),
-        '/notifications': (context) => NotificationScreen(),
-        '/live-tracking': (context) => LiveTrackingScreen(),  // Add this route
-      },
     );
   }
 }

@@ -18,7 +18,7 @@ class CustomNavigationBar extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.8), // Semi-transparent white background
+              color: Colors.white.withOpacity(0.8),
               borderRadius: BorderRadius.circular(30.0),
               boxShadow: [
                 BoxShadow(
@@ -35,6 +35,8 @@ class CustomNavigationBar extends StatelessWidget {
                 return GestureDetector(
                   onTap: () {
                     viewModel.selectItem(index);
+                    String route = viewModel.getSelectedRoute();
+                    Navigator.pushNamed(context, route);
                   },
                   child: NavItemWidget(item: item),
                 );
@@ -42,7 +44,7 @@ class CustomNavigationBar extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: -35, // Adjusted to slightly overlap the navigation bar
+            top: -35,
             child: Container(
               width: 70,
               height: 70,
@@ -66,8 +68,8 @@ class CustomNavigationBar extends StatelessWidget {
                   onPressed: () {
                     // Handle SOS button press
                   },
-                  backgroundColor: Colors.transparent, // Transparent to show the gradient
-                  elevation: 0, // Remove elevation to use the container's shadow
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
                   child: Text(
                     'SOS',
                     style: TextStyle(

@@ -75,13 +75,7 @@ class ArticleScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 8.0),
-        child: FloatingActionButton(
-          backgroundColor: Colors.redAccent,
-          child: Text('SOS', style: TextStyle(fontWeight: FontWeight.bold)),
-          onPressed: () {
-            // Handle SOS button press
-          },
-        ),
+
       ),
     );
   }
