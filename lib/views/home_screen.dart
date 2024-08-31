@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 100 ),
+      padding: const EdgeInsets.only(top: 30),
       child: Scaffold(
         key: _scaffoldKey,
         backgroundColor: Colors.black,
@@ -23,47 +23,12 @@ class HomeScreen extends StatelessWidget {
           leading: IconButton(
             icon: Image.asset(
               'assets/images/avatar.png', // Assuming a menu icon image is provided
-              height: 34,
-              // color: Colors.white,
+              height: 40,
             ),
             onPressed: () {
               _scaffoldKey.currentState?.openDrawer();
             },
           ),
-          title: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(width: 20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 10), // Added SizedBox above the "HELLO" text
-                  Text(
-                    'HELLO,',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    'NAINA',
-                    style: TextStyle(
-                      color: Colors.redAccent,
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height:100,width: 30),
-              Image.asset(
-                'assets/images/hand_wave.png',
-                height: 110,
-              ),
-            ],
-          ),
-
         ),
         drawer: buildDrawer(context),
         body: SafeArea(
@@ -72,6 +37,37 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'HELLO,',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          'NAINA',
+                          style: TextStyle(
+                            color: Colors.redAccent,
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(width: 20),
+                    Image.asset(
+                      'assets/images/hand_wave.png',
+                      height: 90,
+                    ),
+                  ],
+                ),
                 SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -130,13 +126,13 @@ class HomeScreen extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 2),
                   CircleAvatar(
-                    radius: 40,
+                    radius: 20,
                     backgroundColor: Colors.grey[800],
                     backgroundImage: AssetImage('assets/images/avatar.png'), // Use the appropriate image asset
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 5),
                   Text(
                     'Your Profile',
                     style: TextStyle(
