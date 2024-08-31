@@ -16,69 +16,77 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 30),
+    // Define a gradient for the screen background
+    final Gradient gradient = LinearGradient(
+      colors: [Colors.deepPurple.shade900, Colors.black],
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+    );
+
+    return Container(
+      decoration: BoxDecoration(
+        gradient: gradient, // Apply the gradient to the screen background
+      ),
       child: Scaffold(
         key: _scaffoldKey,
-        backgroundColor: Colors.black,
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          elevation: 0,
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 10.0),
-            child: IconButton(
-              icon: Image.asset(
-                'assets/images/avatar.png',
-                height: 80,
-                width: 80,
-                fit: BoxFit.contain,
-              ),
-              onPressed: () {
-                _scaffoldKey.currentState?.openDrawer();
-              },
-            ),
-          ),
-        ),
-        drawer: buildDrawer(context),
+        backgroundColor: Colors.transparent, // Keep the background transparent to show the gradient
+        drawer: buildDrawer(context), // Keep the drawer functionality
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.only(top: 0, left: 15, right: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Row with the avatar and "HELLO, NAINA"
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'HELLO,',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                          ),
+                    GestureDetector(
+                      onTap: () {
+                        _scaffoldKey.currentState?.openDrawer();
+                      },
+                      child: CircleAvatar(
+                        radius: 30, // Increase the size of the avatar
+                        backgroundColor: Colors.grey[800],
+                        child: CircleAvatar(
+                          radius: 28, // Slightly smaller to create a border effect
+                          backgroundImage: AssetImage('assets/images/avatar.png'),
                         ),
-                        Text(
-                          'NAINA',
-                          style: TextStyle(
-                            color: Colors.redAccent,
-                            fontSize: 38,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                     Spacer(),
                     Image.asset(
                       'assets/images/hand_wave.png',
-                      height: 160,
+                      height: 150,
                       fit: BoxFit.contain,
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: 5),
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'HELLO,',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 28,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'NAINA',
+                      style: TextStyle(
+                        color: Colors.redAccent,
+                        fontSize: 38,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20),
                 Container(
                   height: 50,
                   child: ListView(
@@ -91,18 +99,6 @@ class HomeScreen extends StatelessWidget {
                           // Navigate to Detector screen
                         },
                       ),
-                      // buildScrollableOption(
-                      //   context,
-                      //   title: 'Location',
-                      //   onTap: () {
-                      //     Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //           builder: (context) =>
-                      //               LocationPage()),
-                      //     );
-                      //   },
-                      // ),
                       buildScrollableOption(
                         context,
                         title: 'Live Tracking',
@@ -110,8 +106,7 @@ class HomeScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    LocationPage()),
+                                builder: (context) => LocationPage()),
                           );
                         },
                       ),
@@ -139,8 +134,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ),
-        bottomNavigationBar:
-        CustomNavigationBar(viewModel: NavigationViewModel()),
+        bottomNavigationBar: CustomNavigationBar(viewModel: NavigationViewModel()),
       ),
     );
   }
@@ -148,13 +142,19 @@ class HomeScreen extends StatelessWidget {
   Widget buildDrawer(BuildContext context) {
     return Drawer(
       child: Container(
-        color: Colors.black,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.black.withOpacity(0.6), Colors.black],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.black,
+                color: Colors.black.withOpacity(0.4),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -165,14 +165,14 @@ class HomeScreen extends StatelessWidget {
                       color: Colors.redAccent,
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'Poppins',
                     ),
                   ),
                   SizedBox(height: 2),
                   CircleAvatar(
                     radius: 20,
                     backgroundColor: Colors.grey[800],
-                    backgroundImage:
-                    AssetImage('assets/images/avatar.png'),
+                    backgroundImage: AssetImage('assets/images/avatar.png'),
                   ),
                   SizedBox(height: 5),
                   Text(
@@ -213,7 +213,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget buildDrawerItem(BuildContext context, IconData icon, String title, VoidCallback onTap) {
     return ListTile(
-      leading: Icon(icon, color: Colors.redAccent),
+      leading: Icon(icon, color: Colors.redAccent.withOpacity(0.8)),
       title: Text(title, style: TextStyle(color: Colors.white)),
       onTap: onTap,
     );
@@ -227,7 +227,7 @@ class HomeScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 15),
         margin: EdgeInsets.symmetric(horizontal: 5),
         decoration: BoxDecoration(
-          color: Colors.transparent,
+          color: Colors.black.withOpacity(0.6),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Text(
@@ -235,6 +235,7 @@ class HomeScreen extends StatelessWidget {
           style: TextStyle(
             color: Colors.redAccent,
             fontWeight: FontWeight.bold,
+            fontFamily: 'Poppins',
             fontSize: 16,
           ),
         ),
@@ -248,14 +249,11 @@ class HomeScreen extends StatelessWidget {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          buildFeatureCard(
-              'Fake Call', 'assets/images/tracking.png', Colors.redAccent, context),
+          buildFeatureCard('Fake Call', 'assets/images/tracking.png', Colors.redAccent, context),
           SizedBox(width: 10),
-          buildFeatureCard(
-              'Siren', 'assets/images/siren.png', Colors.redAccent, context),
+          buildFeatureCard('Siren', 'assets/images/siren.png', Colors.redAccent, context),
           SizedBox(width: 10),
-          buildFeatureCard('Camera Detector', 'assets/images/tracking.png',
-              Colors.redAccent, context),
+          buildFeatureCard('Camera Detector', 'assets/images/tracking.png', Colors.redAccent, context),
         ],
       ),
     );
@@ -279,22 +277,20 @@ class HomeScreen extends StatelessWidget {
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: color.withOpacity(0.5),
-              offset: Offset(0, 4),
-              blurRadius: 10,
-            ),
-          ],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(imagePath, height: 80),
             SizedBox(height: 10),
-            Text(title,
-                style: TextStyle(
-                    color: Colors.white, fontWeight: FontWeight.bold)),
+            Text(
+              title,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Poppins',
+              ),
+            ),
           ],
         ),
       ),
@@ -313,14 +309,14 @@ class HomeScreen extends StatelessWidget {
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
+                fontFamily: 'Poppins',
               ),
             ),
             TextButton(
               onPressed: () {
                 // Handle "See all" press
               },
-              child: Text('See all',
-                  style: TextStyle(color: Colors.redAccent)),
+              child: Text('See all', style: TextStyle(color: Colors.redAccent)),
             ),
           ],
         ),
@@ -338,7 +334,7 @@ class HomeScreen extends StatelessWidget {
         ),
         buildEmergencyListTile(
           context,
-          icon: Icons.heart_broken,
+          icon: Icons.contact_mail_rounded,
           title: 'Call Loved Ones',
           onTap: () => _makePhoneCall('tel:+911234567890'), // Replace with actual number
         ),
@@ -346,10 +342,9 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget buildEmergencyListTile(BuildContext context,
-      {required IconData icon, required String title, required VoidCallback onTap}) {
+  Widget buildEmergencyListTile(BuildContext context, {required IconData icon, required String title, required VoidCallback onTap}) {
     return ListTile(
-      leading: Icon(icon, color: Colors.blue),
+      leading: Icon(icon, color: Colors.blueAccent),
       title: Text(title, style: TextStyle(color: Colors.white)),
       trailing: TextButton(
         onPressed: onTap,
