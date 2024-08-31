@@ -20,27 +20,32 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.black,
           elevation: 0,
-          leading: IconButton(
-            icon: Image.asset(
-              'assets/images/avatar.png', // Assuming a menu icon image is provided
-              height: 40,
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 10.0), // Adds padding on the left
+            child: IconButton(
+              icon: Image.asset(
+                'assets/images/avatar.png', // Assuming a menu icon image is provided
+                height: 100, // Sets the height to 50px
+                width: 100, // Ensures the width is also 50px
+                fit: BoxFit.contain, // Ensures the image scales well
+              ),
+              onPressed: () {
+                _scaffoldKey.currentState?.openDrawer();
+              },
             ),
-            onPressed: () {
-              _scaffoldKey.currentState?.openDrawer();
-            },
           ),
         ),
         drawer: buildDrawer(context),
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.only(top: 0, left: 15, right: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Column(
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -55,16 +60,17 @@ class HomeScreen extends StatelessWidget {
                           'NAINA',
                           style: TextStyle(
                             color: Colors.redAccent,
-                            fontSize: 28,
+                            fontSize: 38,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(width: 20),
+                    Spacer(), // Pushes the image to the right
                     Image.asset(
                       'assets/images/hand_wave.png',
-                      height: 90,
+                      height: 160,
+                      fit: BoxFit.contain,
                     ),
                   ],
                 ),
