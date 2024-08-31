@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 30 ),
+      padding: const EdgeInsets.only(top: 100 ),
       child: Scaffold(
         key: _scaffoldKey,
         backgroundColor: Colors.black,
@@ -59,19 +59,11 @@ class HomeScreen extends StatelessWidget {
               SizedBox(height:100,width: 30),
               Image.asset(
                 'assets/images/hand_wave.png',
-                height: 100,
+                height: 110,
               ),
             ],
           ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CircleAvatar(
-                backgroundImage: AssetImage('assets/images/avatar.png'),
-                radius: 24,
-              ),
-            ),
-          ],
+
         ),
         drawer: buildDrawer(context),
         body: SafeArea(
