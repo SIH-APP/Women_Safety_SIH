@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'package:url_launcher/url_launcher.dart'; // Import this for making phone calls
-import 'package:vibration/vibration.dart'; // Import this for vibration
+import 'package:url_launcher/url_launcher.dart';
+import 'package:vibration/vibration.dart';
 
 import '../viewmodels/navigation_viewmodel.dart';
 import '../widgets/nav_item_widget.dart';
@@ -39,8 +39,8 @@ class CustomNavigationBar extends StatelessWidget {
                 return GestureDetector(
                   onTap: () {
                     viewModel.selectItem(index);
-                    String route = viewModel.getSelectedRoute();
-                    Navigator.pushNamed(context, route);
+                    Widget nextScreen = viewModel.getSelectedScreen();
+                    _navigateWithTransition(context, nextScreen);
                   },
                   child: NavItemWidget(item: item),
                 );
@@ -70,7 +70,6 @@ class CustomNavigationBar extends StatelessWidget {
               child: Center(
                 child: FloatingActionButton(
                   onPressed: () {
-                    // _handleSOSButtonPress(context); // Handle SOS button press
                     FlutterPhoneDirectCaller.callNumber('+919318440480');
                   },
                   backgroundColor: Colors.transparent,
@@ -92,25 +91,23 @@ class CustomNavigationBar extends StatelessWidget {
     );
   }
 
-  void _handleSOSButtonPress(BuildContext context) async {
-    // Vibrate when SOS is pressed
-    bool? canVibrate = await Vibration.hasVibrator();
-    if (canVibrate == true) {
-      Vibration.vibrate(duration: 500); // Vibrate for 500 milliseconds
-    }
+  void _navigateWithTransition(BuildContext context, Widget nextScreen) {
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => nextScreen,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(1.0, 0.0); // Slide from right
+          const end = Offset.zero;
+          const curve = Curves.easeInOut;
 
-    // Make a call to the specified number
-    _makePhoneCall('tel:122333333322');
+          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
-    // Navigate to the Shake screen
-    Navigator.pushNamed(context, '/shakeDemo');
-  }
-
-  void _makePhoneCall(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
+          return SlideTransition(
+            position: animation.drive(tween),
+            child: child,
+          );
+        },
+      ),
+    );
   }
 }

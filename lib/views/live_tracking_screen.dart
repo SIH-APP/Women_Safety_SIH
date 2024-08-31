@@ -83,7 +83,7 @@ class _LocationPageState extends State<LocationPage> {
   }
 
   Future<List<dynamic>> _fetchPlacesForType(double latitude, double longitude, String type) async {
-    final apiKey = 'YOUR_GOOGLE_API_KEY';
+    final apiKey = 'AIzaSyA6UUZunEH12V49__hjo-yfdc8YAC-_oKg';
     final url =
         'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$latitude,$longitude&radius=1500&type=$type&key=$apiKey';
 
@@ -109,25 +109,22 @@ class _LocationPageState extends State<LocationPage> {
       appBar: AppBar(
         title: Text(
           'Nearby Services',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'Poppins'),
         ),
         backgroundColor: Colors.black,
         elevation: 0,
       ),
       body: Container(
-        decoration: BoxDecoration(
-          color: Colors.black
-        ),
+        color: Colors.black,
         child: _isLoading
             ? Center(
           child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.redAccent),
           ),
         )
             : Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _buildServiceRow(
                 PoliceStationCard(
@@ -139,7 +136,7 @@ class _LocationPageState extends State<LocationPage> {
                   openMapFunc: () => _openMapWithQuery('pharmacy', _pharmacyResults),
                 ),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 20),
               _buildServiceRow(
                 HospitalCard(
                   key: UniqueKey(),
@@ -161,10 +158,39 @@ class _LocationPageState extends State<LocationPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(child: firstCard),
+        Expanded(
+          child: _buildCard(firstCard),
+        ),
         SizedBox(width: 20),
-        Expanded(child: secondCard),
+        Expanded(
+          child: _buildCard(secondCard),
+        ),
       ],
+    );
+  }
+
+  Widget _buildCard(Widget child) {
+    return GestureDetector(
+      onTap: () {}, // Add functionality for tapping the card
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+        decoration: BoxDecoration(
+          color: Colors.grey[900],
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.3),
+              blurRadius: 8,
+              offset: Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: child,
+        ),
+      ),
     );
   }
 

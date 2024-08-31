@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../models/navigation_item_model.dart';
+import '../views/SettingsScreen.dart';
+import '../views/articleScreen.dart';
+import '../views/home_screen.dart';
+import '../views/notification_screen.dart';
 
 class NavigationViewModel {
   List<NavigationItemModel> _items = [
@@ -18,19 +22,19 @@ class NavigationViewModel {
     }
   }
 
-  String getSelectedRoute() {
+  Widget getSelectedScreen() {
     int selectedIndex = _items.indexWhere((item) => item.isSelected);
     switch (selectedIndex) {
       case 0:
-        return '/home';
+        return HomeScreen();
       case 1:
-        return '/articles';
+        return ArticleScreen();
       case 2:
-        return '/notifications';
+        return NotificationScreen();
       case 3:
-        return '/settings';
+        return SettingsScreen();
       default:
-        return '/home';
+        return HomeScreen();
     }
   }
 }

@@ -113,7 +113,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       buildScrollableOption(
                         context,
-                        title: 'Emergency Contact',
+                        title: 'Screaming',
                         onTap: () {
                           // Handle Screaming screen navigation or action
                         },
