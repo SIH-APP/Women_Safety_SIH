@@ -20,9 +20,9 @@ class HomeScreen extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           icon: Image.asset(
-            'assets/images/menu_icon.png', // Assuming a menu icon image is provided
-            height: 30,
-            color: Colors.white,
+            'assets/images/avatar.png', // Assuming a menu icon image is provided
+            height: 34,
+            // color: Colors.white,
           ),
           onPressed: () {
             _scaffoldKey.currentState?.openDrawer();
@@ -31,14 +31,16 @@ class HomeScreen extends StatelessWidget {
         title: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            SizedBox(width: 20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(height: 10), // Added SizedBox above the "HELLO" text
                 Text(
                   'HELLO,',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 24,
+                    fontSize: 28,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -46,16 +48,16 @@ class HomeScreen extends StatelessWidget {
                   'NAINA',
                   style: TextStyle(
                     color: Colors.redAccent,
-                    fontSize: 24,
+                    fontSize: 28,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
-            SizedBox(width: 10),
+            SizedBox(height:100,width: 30),
             Image.asset(
               'assets/images/hand_wave.png',
-              height: 28,
+              height: 100,
             ),
           ],
         ),
@@ -114,44 +116,30 @@ class HomeScreen extends StatelessWidget {
   Widget buildDrawer(BuildContext context) {
     return Drawer(
       child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.black, Colors.grey[900]!],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
+        color: Colors.black,
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.redAccent, Colors.black],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                image: DecorationImage(
-                  image: AssetImage('assets/images/pattern.png'),
-                  fit: BoxFit.cover,
-                  colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.2), BlendMode.dstATop),
-                ),
+                color: Colors.black,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'SAAHASINI',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.redAccent,
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  SizedBox(height: 10),
                   CircleAvatar(
-                    radius: 30,
+                    radius: 40,
                     backgroundColor: Colors.grey[800],
-                    child: Icon(Icons.person, color: Colors.white, size: 50),
+                    backgroundImage: AssetImage('assets/images/avatar.png'), // Use the appropriate image asset
                   ),
                   SizedBox(height: 10),
                   Text(
@@ -161,13 +149,15 @@ class HomeScreen extends StatelessWidget {
                       fontSize: 18,
                     ),
                   ),
+                  SizedBox(height: 10),
+                  Divider(color: Colors.grey[700]),
                 ],
               ),
             ),
             buildDrawerItem(context, Icons.edit, "Edit Profile"),
             buildDrawerItem(context, Icons.lock, "SOS Enable"),
             buildDrawerItem(context, Icons.vpn_key, "Change Password"),
-            buildDrawerItem(context, Icons.notifications, "Notifications", '/notifications'),
+            buildDrawerItem(context, Icons.notifications, "Notifications"),
             buildDrawerItem(context, Icons.settings, "Profile Settings"),
             buildDrawerItem(context, Icons.logout, "Logout"),
           ],
@@ -176,14 +166,12 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget buildDrawerItem(BuildContext context, IconData icon, String title, [String? route]) {
+  Widget buildDrawerItem(BuildContext context, IconData icon, String title) {
     return ListTile(
       leading: Icon(icon, color: Colors.redAccent),
       title: Text(title, style: TextStyle(color: Colors.white)),
       onTap: () {
-        if (route != null) {
-          Navigator.pushNamed(context, route);
-        }
+        // Handle navigation or actions here
       },
     );
   }
