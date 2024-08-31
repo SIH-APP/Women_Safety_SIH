@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:url_launcher/url_launcher.dart'; // Import this for making phone calls
+import 'package:vibration/vibration.dart'; // Import this for vibration
+
 import '../viewmodels/navigation_viewmodel.dart';
 import '../widgets/nav_item_widget.dart';
 
@@ -66,7 +70,8 @@ class CustomNavigationBar extends StatelessWidget {
               child: Center(
                 child: FloatingActionButton(
                   onPressed: () {
-                    // Handle SOS button press
+                    // _handleSOSButtonPress(context); // Handle SOS button press
+                    FlutterPhoneDirectCaller.callNumber('+919318440480');
                   },
                   backgroundColor: Colors.transparent,
                   elevation: 0,
@@ -85,5 +90,27 @@ class CustomNavigationBar extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _handleSOSButtonPress(BuildContext context) async {
+    // Vibrate when SOS is pressed
+    bool? canVibrate = await Vibration.hasVibrator();
+    if (canVibrate == true) {
+      Vibration.vibrate(duration: 500); // Vibrate for 500 milliseconds
+    }
+
+    // Make a call to the specified number
+    _makePhoneCall('tel:122333333322');
+
+    // Navigate to the Shake screen
+    Navigator.pushNamed(context, '/shakeDemo');
+  }
+
+  void _makePhoneCall(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
