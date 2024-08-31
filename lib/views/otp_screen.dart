@@ -24,7 +24,7 @@ class OtpScreen extends StatelessWidget {
           children: [
             Text('Enter the OTP code we just sent to your registered Email/Phone number', style: TextStyle(fontSize: 16)),
             SizedBox(height: 16),
-            CustomTextField(label: 'OTP', controller: otpController),
+            CustomTextField(label: 'OTP', controller: otpController, validator: (value) {  },),
             SizedBox(height: 32),
             CustomButton(
               text: 'Reset Password',

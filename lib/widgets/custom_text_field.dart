@@ -5,22 +5,27 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final TextInputType keyboardType;
   final bool isPassword;
-  final Icon? suffixIcon;
+  final bool isPasswordVisible;
+  final Widget? suffixIcon;
+  final String? Function(String?)? validator;
 
   CustomTextField({
     required this.label,
     required this.controller,
     this.keyboardType = TextInputType.text,
     this.isPassword = false,
+    this.isPasswordVisible = false,
     this.suffixIcon,
+    this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
-      obscureText: isPassword,
+      obscureText: isPassword && !isPasswordVisible,  // Toggle password visibility
+      validator: validator,
       style: TextStyle(color: Colors.white),
       decoration: InputDecoration(
         labelText: label,
@@ -39,12 +44,7 @@ class CustomTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
           borderSide: BorderSide(color: Colors.deepOrangeAccent, width: 2),
         ),
-        suffixIcon: suffixIcon != null
-            ? IconTheme(
-          data: IconThemeData(color: Colors.white54),
-          child: suffixIcon!,
-        )
-            : null,
+        suffixIcon: suffixIcon,
         contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
       ),
     );

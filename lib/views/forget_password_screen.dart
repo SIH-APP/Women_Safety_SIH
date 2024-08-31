@@ -25,7 +25,7 @@ class ForgetPasswordScreen extends StatelessWidget {
           children: [
             Text('Forget Password', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.deepOrange)),
             SizedBox(height: 16),
-            CustomTextField(label: 'Email ID/Mobile Number', controller: emailController),
+            CustomTextField(label: 'Email ID/Mobile Number', controller: emailController, validator: (value) {  },),
             SizedBox(height: 32),
             CustomButton(
               text: 'Continue',

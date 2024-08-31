@@ -23,6 +23,7 @@ class HomeScreen extends StatelessWidget {
         leading: IconButton(
           icon: Image.asset(
             'assets/images/menu_icon.png', // Assuming a menu icon image is provided
+            height: 30,
             color: Colors.white,
           ),
           onPressed: () {
