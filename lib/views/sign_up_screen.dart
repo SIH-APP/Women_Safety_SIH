@@ -1,4 +1,3 @@
-// signup_screen.dart
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
 import '../viewmodels/auth_viewmodel.dart';
@@ -78,6 +77,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your name';
                       }
+                      if (value.length < 3) {
+                        return 'Name must be at least 3 characters long';
+                      }
+                      if (!RegExp(r"^[a-zA-Z\s]+$").hasMatch(value)) {
+                        return 'Name must contain only letters and spaces';
+                      }
                       return null;
                     },
                   ),
@@ -89,6 +94,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your email or phone number';
+                      }
+                      if (RegExp(r"^[0-9]+$").hasMatch(value)) {
+                        // If only digits, assume phone number
+                        if (value.length < 10 || value.length > 15) {
+                          return 'Phone number must be between 10 and 15 digits';
+                        }
+                      } else if (!RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$").hasMatch(value)) {
+                        return 'Please enter a valid email address';
                       }
                       return null;
                     },
@@ -114,8 +127,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your password';
                       }
-                      if (value.length < 6) {
-                        return 'Password must be at least 6 characters long';
+                      if (value.length < 8) {
+                        return 'Password must be at least 8 characters long';
+                      }
+                      if (!RegExp(r'[A-Z]').hasMatch(value)) {
+                        return 'Password must contain at least one uppercase letter';
+                      }
+                      if (!RegExp(r'[a-z]').hasMatch(value)) {
+                        return 'Password must contain at least one lowercase letter';
+                      }
+                      if (!RegExp(r'[0-9]').hasMatch(value)) {
+                        return 'Password must contain at least one number';
+                      }
+                      if (!RegExp(r'[!@#\$&*~]').hasMatch(value)) {
+                        return 'Password must contain at least one special character (!@#\$&*~)';
                       }
                       return null;
                     },
@@ -171,7 +196,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         if (_formKey.currentState?.validate() ?? false) {
                           if (agreeToTerms) {
                             Navigator.pushReplacementNamed(context, '/home');
-                            // Handle sign-up logic
+                            // Handle sign-up logic here
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(

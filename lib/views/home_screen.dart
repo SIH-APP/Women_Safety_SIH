@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../viewmodels/navigation_viewmodel.dart';
+import 'LocationFetcherScreen.dart';
 import 'live_tracking_screen.dart';
 import 'HomeViewModel.dart';
 import 'custom_navigation_bar.dart';
@@ -77,21 +78,51 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    buildCategoryItem(context, 'Detector', isSelected: true),
-                    buildCategoryItem(context, 'Location'),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => LiveTrackingScreen()),
-                        );
-                      },
-                      child: buildCategoryItem(context, 'Live Tracking', isSelected: true),
-                    ),
-                  ],
+                Container(
+                  height: 50,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      buildScrollableOption(
+                        context,
+                        title: 'Detector',
+                        onTap: () {
+                          // Navigate to Detector screen
+                        },
+                      ),
+                      buildScrollableOption(
+                        context,
+                        title: 'Location',
+                        onTap: () {
+                          // Navigate to Location screen
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => LocationFetcherScreen()),
+                          );
+                        },
+                      ),
+                      buildScrollableOption(
+                        context,
+                        title: 'Live Tracking',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => LiveTrackingScreen()),
+                          );
+                        },
+                      ),
+                      buildScrollableOption(
+                        context,
+                        title: 'Screaming',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => LiveTrackingScreen()),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(height: 20),
                 Expanded(
@@ -175,24 +206,26 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget buildCategoryItem(BuildContext context, String title, {bool isSelected = false}) {
-    return Column(
-      children: [
-        Text(
+  Widget buildScrollableOption(BuildContext context, {required String title, required VoidCallback onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(horizontal: 15),
+        margin: EdgeInsets.symmetric(horizontal: 5),
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Text(
           title,
           style: TextStyle(
-            color: isSelected ? Colors.redAccent : Colors.white,
-            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+            color: Colors.redAccent,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
           ),
         ),
-        if (isSelected)
-          Container(
-            margin: EdgeInsets.only(top: 4),
-            height: 2,
-            width: 30,
-            color: Colors.redAccent,
-          )
-      ],
+      ),
     );
   }
 
@@ -202,11 +235,11 @@ class HomeScreen extends StatelessWidget {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          buildFeatureCard('Spy Camera Detector', 'assets/images/camera.png', Colors.deepPurpleAccent, context),
+          buildFeatureCard('Spy Camera Detector', 'assets/images/tracking.png', Colors.redAccent, context),
           SizedBox(width: 10),
-          buildFeatureCard('Fake Call', 'assets/images/tracking.png', Colors.blueAccent, context),
+          buildFeatureCard('Fake Call', 'assets/images/tracking.png', Colors.redAccent, context),
           SizedBox(width: 10),
-          buildFeatureCard('Live Tracking', 'assets/images/digital.png', Colors.orangeAccent, context),
+          buildFeatureCard('Live Tracking', 'assets/images/digital.png', Colors.redAccent, context),
         ],
       ),
     );
