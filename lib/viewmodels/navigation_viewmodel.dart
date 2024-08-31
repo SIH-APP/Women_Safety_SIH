@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 class NavigationViewModel {
   List<NavigationItemModel> _items = [
     NavigationItemModel(icon: Icons.home, isSelected: true),
-    NavigationItemModel(icon: Icons.note, isSelected: false),
-    NavigationItemModel(icon: Icons.search, isSelected: false),
+    NavigationItemModel(icon: Icons.article, isSelected: false),
+    // NavigationItemModel(icon: Icons.search, isSelected: false),
     NavigationItemModel(icon: Icons.notifications, isSelected: false),
-    NavigationItemModel(icon: Icons.add, isSelected: false),
+    NavigationItemModel(icon: Icons.settings, isSelected: false),
   ];
 
   List<NavigationItemModel> get items => _items;

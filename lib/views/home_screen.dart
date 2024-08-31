@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import '../viewmodels/navigation_viewmodel.dart';
-import 'SettingsScreen.dart';
 import 'live_tracking_screen.dart';
-import 'notification_screen.dart';
 import 'HomeViewModel.dart';
 import 'custom_navigation_bar.dart';
 
