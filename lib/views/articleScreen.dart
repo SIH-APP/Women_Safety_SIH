@@ -73,7 +73,7 @@ class ArticleScreen extends StatelessWidget {
                 context,
                 'Kolkata rape case: India\'s top court stays abortion for rape survivor',
                 'India\'s top court has ruled that a rape survivor must bear her child after she...',
-                'assets/images/article_image_3.png',
+                'assets/images/article_image_4.png',
                 32,
                 300,
               ),
@@ -83,7 +83,7 @@ class ArticleScreen extends StatelessWidget {
                 context,
                 'Kolkata rape case: India\'s top court stays abortion for rape survivor',
                 'India\'s top court has ruled that a rape survivor must bear her child after she...',
-                'assets/images/article_image_3.png',
+                'assets/images/article_image_5.png',
                 32,
                 300,
               ),
@@ -101,66 +101,71 @@ class ArticleScreen extends StatelessWidget {
   }
 
   Widget buildArticleCard(BuildContext context, String title, String description, String imagePath, int comments, int likes) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.grey[850],
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black54,
-            offset: Offset(0, 4),
-            blurRadius: 10,
-          ),
-        ],
-      ),
-      child: ListTile(
-        contentPadding: EdgeInsets.all(16),
-        leading: ClipRRect(
-          borderRadius: BorderRadius.circular(8.0),
-          child: Image.asset(
-            imagePath,
-            width: 60,
-            height: 60,
-            fit: BoxFit.cover,
-          ),
-        ),
-        title: Text(
-          title,
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 8),
-            Text(
-              description,
-              style: TextStyle(color: Colors.white70),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-            SizedBox(height: 8),
-            Row(
-              children: [
-                Icon(Icons.comment, color: Colors.redAccent, size: 16),
-                SizedBox(width: 4),
-                Text('$comments comments', style: TextStyle(color: Colors.white70)),
-                SizedBox(width: 16),
-                Icon(Icons.thumb_up, color: Colors.redAccent, size: 16),
-                SizedBox(width: 4),
-                Text('$likes likes', style: TextStyle(color: Colors.white70)),
-              ],
+    return InkWell(
+      onTap: (){
+
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.grey[850],
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black54,
+              offset: Offset(0, 4),
+              blurRadius: 10,
             ),
           ],
         ),
-        trailing: IconButton(
-          icon: Icon(Icons.favorite_border, color: Colors.white),
-          onPressed: () {
-            // Implement favorite functionality here
+        child: ListTile(
+          contentPadding: EdgeInsets.all(16),
+          leading: ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: Image.asset(
+              imagePath,
+              width: 60,
+              height: 60,
+              fit: BoxFit.cover,
+            ),
+          ),
+          title: Text(
+            title,
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 8),
+              Text(
+                description,
+                style: TextStyle(color: Colors.white70),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              SizedBox(height: 8),
+              Row(
+                children: [
+                  Icon(Icons.comment, color: Colors.redAccent, size: 16),
+                  SizedBox(width: 4),
+                  Text('$comments comments', style: TextStyle(color: Colors.white70)),
+                  SizedBox(width: 16),
+                  Icon(Icons.thumb_up, color: Colors.redAccent, size: 16),
+                  SizedBox(width: 4),
+                  Text('$likes likes', style: TextStyle(color: Colors.white70)),
+                ],
+              ),
+            ],
+          ),
+          trailing: IconButton(
+            icon: Icon(Icons.favorite_border, color: Colors.white),
+            onPressed: () {
+              // Implement favorite functionality here
+            },
+          ),
+          onTap: () {
+            // Implement article tap functionality here
           },
         ),
-        onTap: () {
-          // Implement article tap functionality here
-        },
       ),
     );
   }

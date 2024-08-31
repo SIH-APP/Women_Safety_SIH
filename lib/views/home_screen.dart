@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../viewmodels/navigation_viewmodel.dart';
 import 'live_tracking_screen.dart';
 import 'HomeViewModel.dart';
@@ -67,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Spacer(),  // Pushes the image to the right
+                    Spacer(), // Pushes the image to the right
                     Image.asset(
                       'assets/images/hand_wave.png',
                       height: 160,
@@ -96,7 +97,7 @@ class HomeScreen extends StatelessWidget {
                 Expanded(
                   child: ListView(
                     children: [
-                      buildFeatureCardScroll(),
+                      buildFeatureCardScroll(context),
                       SizedBox(height: 20),
                       buildFavoritesSection(context),
                     ],
@@ -195,47 +196,52 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget buildFeatureCardScroll() {
+  Widget buildFeatureCardScroll(BuildContext context) {
     return SizedBox(
       height: 180,
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          buildFeatureCard('Spy Camera Detector', 'assets/images/safety.png', Colors.deepPurpleAccent),
+          buildFeatureCard('Spy Camera Detector', 'assets/images/camera.png', Colors.deepPurpleAccent, context),
           SizedBox(width: 10),
-          buildFeatureCard('Emergency Contact', 'assets/images/tracking.png', Colors.blueAccent),
+          buildFeatureCard('Fake Call', 'assets/images/tracking.png', Colors.blueAccent, context),
           SizedBox(width: 10),
-          buildFeatureCard('Live Tracking', 'assets/images/digital.png', Colors.orangeAccent),
+          buildFeatureCard('Live Tracking', 'assets/images/digital.png', Colors.orangeAccent, context),
         ],
       ),
     );
   }
 
-  Widget buildFeatureCard(String title, String imagePath, Color color) {
-    return Container(
-      width: 150,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [color.withOpacity(0.8), color],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: color.withOpacity(0.5),
-            offset: Offset(0, 4),
-            blurRadius: 10,
+  Widget buildFeatureCard(String title, String imagePath, Color color, BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, '/call'); // Navigates to the call screen when tapped
+      },
+      child: Container(
+        width: 150,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [color.withOpacity(0.8), color],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-        ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(imagePath, height: 80, color: Colors.white),
-          SizedBox(height: 10),
-          Text(title, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-        ],
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: color.withOpacity(0.5),
+              offset: Offset(0, 4),
+              blurRadius: 10,
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(imagePath, height: 80),
+            SizedBox(height: 10),
+            Text(title, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+          ],
+        ),
       ),
     );
   }
@@ -262,32 +268,52 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
-        ListTile(
-          leading: Icon(Icons.phone, color: Colors.blue),
-          title: Text('Fake call', style: TextStyle(color: Colors.white)),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CallPage(
-                  callID: "fake_call_${DateTime.now().millisecondsSinceEpoch}",
-                ),
-              ),
-            );
-          },
+        buildEmergencyListTile(
+          context,
+          icon: Icons.phone,
+          title: 'Call Ambulance 108',
+          onTap: () => _makePhoneCall('tel:108'),
         ),
-        ListTile(
-          leading: Icon(Icons.feedback, color: Colors.redAccent),
-          title: Text('Education Feedback', style: TextStyle(color: Colors.white)),
+        buildEmergencyListTile(
+          context,
+          icon: Icons.local_police,
+          title: 'Call Police 100',
+          onTap: () => _makePhoneCall('tel:100'),
         ),
-        ListTile(
-          leading: Icon(Icons.code, color: Colors.redAccent),
-          title: Text('Code Generation', style: TextStyle(color: Colors.white)),
+        buildEmergencyListTile(
+          context,
+          icon: Icons.heart_broken,
+          title: 'Call Loved Ones',
+          onTap: () => _makePhoneCall('tel:+911234567890'), // Replace with actual number
         ),
       ],
     );
   }
+
+  Widget buildEmergencyListTile(BuildContext context, {required IconData icon, required String title, required VoidCallback onTap}) {
+    return ListTile(
+      leading: Icon(icon, color: Colors.blue),
+      title: Text(title, style: TextStyle(color: Colors.white)),
+      trailing: TextButton(
+        onPressed: onTap,
+        child: Text(
+          'Call',
+          style: TextStyle(color: Colors.redAccent, fontSize: 16),
+        ),
+      ),
+      onTap: onTap,
+    );
+  }
+
+  Future<void> _makePhoneCall(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 }
+
 
 class CallPage extends StatelessWidget {
   const CallPage({Key? key, required this.callID}) : super(key: key);
@@ -298,7 +324,7 @@ class CallPage extends StatelessWidget {
     return ZegoUIKitPrebuiltCall(
       appID: 1484647939,
       appSign: '751874393a5ce84d7660387e93aabdd5f9be8e1faeaacd1ed95d9e199f6ec402',
-      userID: 'Fake Call',
+      userID: 'Emergency Contact',
       userName: 'USER',
       callID: callID,
       config: ZegoUIKitPrebuiltCallConfig.oneOnOneVoiceCall(),

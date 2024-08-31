@@ -55,8 +55,8 @@ class NotificationScreen extends StatelessWidget {
                 context,
                 title: 'TODAY',
                 notifications: [
-                  buildNotificationTile(context, 'Warning!!', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', '1h'),
-                  buildNotificationTile(context, 'Warning!!', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', '1h'),
+                  buildNotificationTile(context,  "Emergency!", "Your SOS alert has been sent. Help is on the way!" ,'2h'),
+                  buildNotificationTile(context, 'Warning!!', 'Location shared with your emergency contacts. Stay calm, help is on its way!', '1h'),
                 ],
               ),
               SizedBox(height: 20),
@@ -64,9 +64,9 @@ class NotificationScreen extends StatelessWidget {
                 context,
                 title: 'Previous',
                 notifications: [
-                  buildNotificationTile(context, 'Warning!!', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', '1d'),
-                  buildNotificationTile(context, 'Warning!!', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', '1d'),
-                  buildNotificationTile(context, 'Warning!!', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', '3d'),
+                  buildNotificationTile(context, 'Warning!!', 'Danger detected! Press the SOS button to alert your contacts immediately', '1d'),
+                  buildNotificationTile(context, 'Warning!!', 'Warning: You are entering a high-risk area. Stay alert!', '1d'),
+                  buildNotificationTile(context, 'Warning!!', 'Caution: Unfamiliar area detected. Would you like to share your location?', '3d'),
                 ],
               ),
             ],
