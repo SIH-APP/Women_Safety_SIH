@@ -265,9 +265,15 @@ class HomeScreen extends StatelessWidget {
       onTap: () {
         if (title == 'Siren') {
           _audioPlayer.play(AssetSource('audio/siren.mp3'));
-        } else {
+        }
+        if(title =='Fake Call'){
+          Navigator.pushNamed(context, '/call');
+
+        }
+        if(title =='Camera Detector'){
           Navigator.pushNamed(context, '/spycam');
         }
+
       },
       child: Container(
         width: 150,
