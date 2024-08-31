@@ -25,8 +25,8 @@ class HomeScreen extends StatelessWidget {
             child: IconButton(
               icon: Image.asset(
                 'assets/images/avatar.png', // Assuming a menu icon image is provided
-                height: 100, // Sets the height to 50px
-                width: 100, // Ensures the width is also 50px
+                height: 80, // Sets the height to 80px
+                width: 80, // Ensures the width is also 80px
                 fit: BoxFit.contain, // Ensures the image scales well
               ),
               onPressed: () {
@@ -66,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Spacer(), // Pushes the image to the right
+                    Spacer(),  // Pushes the image to the right
                     Image.asset(
                       'assets/images/hand_wave.png',
                       height: 160,
