@@ -1,0 +1,106 @@
+[
+    {
+        "Location Name":"Pari Chowk",
+        "Latitude":28.474387,
+        "Longitude":77.50399,
+        "Crime Type":"Eve Teasing",
+        "Crime Frequency":25,
+        "Risk Level":"High"
+    },
+    {
+        "Location Name":"Alpha Commercial Belt",
+        "Latitude":28.471995,
+        "Longitude":77.497316,
+        "Crime Type":"Robbery",
+        "Crime Frequency":15,
+        "Risk Level":"Medium"
+    },
+    {
+        "Location Name":"Knowledge Park III",
+        "Latitude":28.46979,
+        "Longitude":77.503097,
+        "Crime Type":"Assault",
+        "Crime Frequency":30,
+        "Risk Level":"High"
+    },
+    {
+        "Location Name":"Gamma 1 Market",
+        "Latitude":28.475367,
+        "Longitude":77.495869,
+        "Crime Type":"Eve Teasing",
+        "Crime Frequency":10,
+        "Risk Level":"Medium"
+    },
+    {
+        "Location Name":"Surajpur Industrial Area",
+        "Latitude":28.495533,
+        "Longitude":77.495836,
+        "Crime Type":"Robbery",
+        "Crime Frequency":8,
+        "Risk Level":"Low"
+    },
+    {
+        "Location Name":"Sector 62 Metro Station",
+        "Latitude":28.626522,
+        "Longitude":77.375109,
+        "Crime Type":"Harassment",
+        "Crime Frequency":20,
+        "Risk Level":"High"
+    },
+    {
+        "Location Name":"Jaypee Greens",
+        "Latitude":28.451684,
+        "Longitude":77.518497,
+        "Crime Type":"Kidnapping",
+        "Crime Frequency":5,
+        "Risk Level":"Low"
+    },
+    {
+        "Location Name":"Jagat Farm",
+        "Latitude":28.475963,
+        "Longitude":77.507313,
+        "Crime Type":"Eve Teasing",
+        "Crime Frequency":18,
+        "Risk Level":"High"
+    },
+    {
+        "Location Name":"Noida International University",
+        "Latitude":28.459545,
+        "Longitude":77.50934,
+        "Crime Type":"Harassment",
+        "Crime Frequency":12,
+        "Risk Level":"Medium"
+    },
+    {
+        "Location Name":"Delta 1 Park",
+        "Latitude":28.462595,
+        "Longitude":77.493112,
+        "Crime Type":"Assault",
+        "Crime Frequency":22,
+        "Risk Level":"High"
+    },
+    {
+        "Location Name":"Kasna Road",
+        "Latitude":28.472653,
+        "Longitude":77.503113,
+        "Crime Type":"Robbery",
+        "Crime Frequency":14,
+        "Risk Level":"Medium"
+    },
+    {
+        "Location Name":"Galgotias University",
+        "Latitude":28.462092,
+        "Longitude":77.536215,
+        "Crime Type":"Eve Teasing",
+        "Crime Frequency":6,
+        "Risk Level":"Low"
+    },
+    {
+        "Location Name":"Bennett University",
+        "Latitude":28.52474,
+        "Longitude":77.558791,
+        "Crime Type":"Harassment",
+        "Crime Frequency":9,
+        "Risk Level":"Medium"
+    }
+]

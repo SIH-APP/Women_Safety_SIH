@@ -249,17 +249,17 @@ class HomeScreen extends StatelessWidget {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          buildFeatureCard('Fake Call', 'assets/images/tracking.png', Colors.redAccent, context),
+          buildFeatureCard('Fake Call', 'assets/images/call.png', context),
           SizedBox(width: 10),
-          buildFeatureCard('Siren', 'assets/images/siren.png', Colors.redAccent, context),
+          buildFeatureCard('Siren', 'assets/images/siren.png', context),
           SizedBox(width: 10),
-          buildFeatureCard('Camera Detector', 'assets/images/tracking.png', Colors.redAccent, context),
+          buildFeatureCard('Camera Detector', 'assets/images/tracking.png', context),
         ],
       ),
     );
   }
 
-  Widget buildFeatureCard(String title, String imagePath, Color color, BuildContext context) {
+  Widget buildFeatureCard(String title, String imagePath, BuildContext context) {
     return InkWell(
       onTap: () {
         if (title == 'Siren') {
@@ -271,24 +271,36 @@ class HomeScreen extends StatelessWidget {
       child: Container(
         width: 150,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [color.withOpacity(0.8), color],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.circular(16),
+          color: Colors.black, // Set the background color to black
+          borderRadius: BorderRadius.circular(16), // Rounded corners
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(imagePath, height: 80),
-            SizedBox(height: 10),
-            Text(
-              title,
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Poppins',
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(16)), // Top rounded corners
+                  image: DecorationImage(
+                    image: AssetImage(imagePath),
+                    fit: BoxFit.cover, // Cover the container with the image
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              decoration: BoxDecoration(
+                color: Colors.black, // Keep the black background for the text section
+                borderRadius: BorderRadius.vertical(bottom: Radius.circular(16)), // Bottom rounded corners
+              ),
+              child: Text(
+                title,
+                style: TextStyle(
+                  color: Colors.white, // White text color
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Poppins',
+                ),
               ),
             ),
           ],
