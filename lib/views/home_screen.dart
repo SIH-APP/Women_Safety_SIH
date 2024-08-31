@@ -277,7 +277,7 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
         ListTile(
-          leading: Icon(Icons.phone, color: Colors.redAccent),
+          leading: Icon(Icons.phone, color: Colors.blue),
           title: Text('Fake call', style: TextStyle(color: Colors.white)),
         ),
         ListTile(
