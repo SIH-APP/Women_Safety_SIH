@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../viewmodels/navigation_viewmodel.dart';
@@ -9,6 +10,7 @@ import 'custom_navigation_bar.dart';
 class HomeScreen extends StatelessWidget {
   final HomeViewModel viewModel = HomeViewModel();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final AudioPlayer _audioPlayer = AudioPlayer();
 
   HomeScreen({super.key});
 
@@ -23,13 +25,13 @@ class HomeScreen extends StatelessWidget {
           backgroundColor: Colors.black,
           elevation: 0,
           leading: Padding(
-            padding: const EdgeInsets.only(left: 10.0), // Adds padding on the left
+            padding: const EdgeInsets.only(left: 10.0),
             child: IconButton(
               icon: Image.asset(
-                'assets/images/avatar.png', // Assuming a menu icon image is provided
-                height: 80, // Sets the height to 80px
-                width: 80, // Ensures the width is also 80px
-                fit: BoxFit.contain, // Ensures the image scales well
+                'assets/images/avatar.png',
+                height: 80,
+                width: 80,
+                fit: BoxFit.contain,
               ),
               onPressed: () {
                 _scaffoldKey.currentState?.openDrawer();
@@ -68,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Spacer(), // Pushes the image to the right
+                    Spacer(),
                     Image.asset(
                       'assets/images/hand_wave.png',
                       height: 160,
@@ -89,26 +91,27 @@ class HomeScreen extends StatelessWidget {
                           // Navigate to Detector screen
                         },
                       ),
-                      buildScrollableOption(
-                        context,
-                        title: 'Location',
-                        onTap: () {
-                          // Navigate to Location screen
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) => LocationFetcherScreen()),
-                          // );
-                          Navigator.pushNamed(context, '/map');
-                        },
-                      ),
-
+                      // buildScrollableOption(
+                      //   context,
+                      //   title: 'Location',
+                      //   onTap: () {
+                      //     Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //           builder: (context) =>
+                      //               LocationPage()),
+                      //     );
+                      //   },
+                      // ),
                       buildScrollableOption(
                         context,
                         title: 'Live Tracking',
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => LocationPage()),
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    LocationPage()),
                           );
                         },
                       ),
@@ -116,10 +119,7 @@ class HomeScreen extends StatelessWidget {
                         context,
                         title: 'Screaming',
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => LocationPage()),
-                          );
+                          // Handle Screaming screen navigation or action
                         },
                       ),
                     ],
@@ -139,7 +139,8 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ),
-        bottomNavigationBar: CustomNavigationBar(viewModel: NavigationViewModel()),
+        bottomNavigationBar:
+        CustomNavigationBar(viewModel: NavigationViewModel()),
       ),
     );
   }
@@ -170,7 +171,8 @@ class HomeScreen extends StatelessWidget {
                   CircleAvatar(
                     radius: 20,
                     backgroundColor: Colors.grey[800],
-                    backgroundImage: AssetImage('assets/images/avatar.png'), // Use the appropriate image asset
+                    backgroundImage:
+                    AssetImage('assets/images/avatar.png'),
                   ),
                   SizedBox(height: 5),
                   Text(
@@ -185,25 +187,35 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            buildDrawerItem(context, Icons.edit, "Edit Profile"),
-            buildDrawerItem(context, Icons.lock, "SOS Enable"),
-            buildDrawerItem(context, Icons.vpn_key, "Change Password"),
-            buildDrawerItem(context, Icons.notifications, "Notifications"),
-            buildDrawerItem(context, Icons.settings, "Profile Settings"),
-            buildDrawerItem(context, Icons.logout, "Logout"),
+            buildDrawerItem(context, Icons.edit, "Edit Profile", () {
+              // Handle Edit Profile navigation or action
+            }),
+            buildDrawerItem(context, Icons.lock, "SOS Enable", () {
+              // Handle SOS Enable navigation or action
+            }),
+            buildDrawerItem(context, Icons.vpn_key, "Change Password", () {
+              // Handle Change Password navigation or action
+            }),
+            buildDrawerItem(context, Icons.notifications, "Notifications", () {
+              // Handle Notifications navigation or action
+            }),
+            buildDrawerItem(context, Icons.settings, "Profile Settings", () {
+              // Handle Profile Settings navigation or action
+            }),
+            buildDrawerItem(context, Icons.logout, "Logout", () {
+              // Handle Logout navigation or action
+            }),
           ],
         ),
       ),
     );
   }
 
-  Widget buildDrawerItem(BuildContext context, IconData icon, String title) {
+  Widget buildDrawerItem(BuildContext context, IconData icon, String title, VoidCallback onTap) {
     return ListTile(
       leading: Icon(icon, color: Colors.redAccent),
       title: Text(title, style: TextStyle(color: Colors.white)),
-      onTap: () {
-        // Handle navigation or actions here
-      },
+      onTap: onTap,
     );
   }
 
@@ -236,11 +248,14 @@ class HomeScreen extends StatelessWidget {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          buildFeatureCard('Spy Camera Detector', 'assets/images/tracking.png', Colors.redAccent, context),
+          buildFeatureCard(
+              'Fake Call', 'assets/images/tracking.png', Colors.redAccent, context),
           SizedBox(width: 10),
-          buildFeatureCard('Fake Call', 'assets/images/tracking.png', Colors.redAccent, context),
+          buildFeatureCard(
+              'Siren', 'assets/images/siren.png', Colors.redAccent, context),
           SizedBox(width: 10),
-          buildFeatureCard('Live Tracking', 'assets/images/digital.png', Colors.redAccent, context),
+          buildFeatureCard('Camera Detector', 'assets/images/tracking.png',
+              Colors.redAccent, context),
         ],
       ),
     );
@@ -249,7 +264,11 @@ class HomeScreen extends StatelessWidget {
   Widget buildFeatureCard(String title, String imagePath, Color color, BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, '/call'); // Navigates to the call screen when tapped
+        if (title == 'Siren') {
+          _audioPlayer.play(AssetSource('audio/siren.mp3'));
+        } else {
+          Navigator.pushNamed(context, '/call');
+        }
       },
       child: Container(
         width: 150,
@@ -273,7 +292,9 @@ class HomeScreen extends StatelessWidget {
           children: [
             Image.asset(imagePath, height: 80),
             SizedBox(height: 10),
-            Text(title, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+            Text(title,
+                style: TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.bold)),
           ],
         ),
       ),
@@ -298,7 +319,8 @@ class HomeScreen extends StatelessWidget {
               onPressed: () {
                 // Handle "See all" press
               },
-              child: Text('See all', style: TextStyle(color: Colors.redAccent)),
+              child: Text('See all',
+                  style: TextStyle(color: Colors.redAccent)),
             ),
           ],
         ),
@@ -324,7 +346,8 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget buildEmergencyListTile(BuildContext context, {required IconData icon, required String title, required VoidCallback onTap}) {
+  Widget buildEmergencyListTile(BuildContext context,
+      {required IconData icon, required String title, required VoidCallback onTap}) {
     return ListTile(
       leading: Icon(icon, color: Colors.blue),
       title: Text(title, style: TextStyle(color: Colors.white)),
@@ -348,7 +371,6 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-
 class CallPage extends StatelessWidget {
   const CallPage({Key? key, required this.callID}) : super(key: key);
   final String callID;
@@ -357,11 +379,12 @@ class CallPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ZegoUIKitPrebuiltCall(
       appID: 1484647939,
-      appSign: '751874393a5ce84d7660387e93aabdd5f9be8e1faeaacd1ed95d9e199f6ec402',
+      appSign:
+      '751874393a5ce84d7660387e93aabdd5f9be8e1faeaacd1ed95d9e199f6ec402',
       userID: 'Emergency Contact',
       userName: 'USER',
       callID: callID,
       config: ZegoUIKitPrebuiltCallConfig.oneOnOneVoiceCall(),
-    ); // ZegoUIKitPrebuiltCall
+    );
   }
 }
