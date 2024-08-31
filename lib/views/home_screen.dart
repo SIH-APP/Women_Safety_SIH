@@ -12,104 +12,107 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      backgroundColor: Colors.black,
-      appBar: AppBar(
+    return Padding(
+      padding: const EdgeInsets.only(top: 30 ),
+      child: Scaffold(
+        key: _scaffoldKey,
         backgroundColor: Colors.black,
-        elevation: 0,
-        leading: IconButton(
-          icon: Image.asset(
-            'assets/images/avatar.png', // Assuming a menu icon image is provided
-            height: 34,
-            // color: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          elevation: 0,
+          leading: IconButton(
+            icon: Image.asset(
+              'assets/images/avatar.png', // Assuming a menu icon image is provided
+              height: 34,
+              // color: Colors.white,
+            ),
+            onPressed: () {
+              _scaffoldKey.currentState?.openDrawer();
+            },
           ),
-          onPressed: () {
-            _scaffoldKey.currentState?.openDrawer();
-          },
+          title: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(width: 20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 10), // Added SizedBox above the "HELLO" text
+                  Text(
+                    'HELLO,',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    'NAINA',
+                    style: TextStyle(
+                      color: Colors.redAccent,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height:100,width: 30),
+              Image.asset(
+                'assets/images/hand_wave.png',
+                height: 100,
+              ),
+            ],
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CircleAvatar(
+                backgroundImage: AssetImage('assets/images/avatar.png'),
+                radius: 24,
+              ),
+            ),
+          ],
         ),
-        title: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(width: 20),
-            Column(
+        drawer: buildDrawer(context),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 10), // Added SizedBox above the "HELLO" text
-                Text(
-                  'HELLO,',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                  ),
+                SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    buildCategoryItem(context, 'Detector', isSelected: true),
+                    buildCategoryItem(context, 'Location'),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => LiveTrackingScreen()),
+                        );
+                      },
+                      child: buildCategoryItem(context, 'Live Tracking', isSelected: true),
+                    ),
+                  ],
                 ),
-                Text(
-                  'NAINA',
-                  style: TextStyle(
-                    color: Colors.redAccent,
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
+                SizedBox(height: 20),
+                Expanded(
+                  child: ListView(
+                    children: [
+                      buildFeatureCardScroll(),
+                      SizedBox(height: 20),
+                      buildFavoritesSection(context),
+                    ],
                   ),
                 ),
               ],
             ),
-            SizedBox(height:100,width: 30),
-            Image.asset(
-              'assets/images/hand_wave.png',
-              height: 100,
-            ),
-          ],
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CircleAvatar(
-              backgroundImage: AssetImage('assets/images/avatar.png'),
-              radius: 24,
-            ),
-          ),
-        ],
-      ),
-      drawer: buildDrawer(context),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  buildCategoryItem(context, 'Detector', isSelected: true),
-                  buildCategoryItem(context, 'Location'),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LiveTrackingScreen()),
-                      );
-                    },
-                    child: buildCategoryItem(context, 'Live Tracking', isSelected: true),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20),
-              Expanded(
-                child: ListView(
-                  children: [
-                    buildFeatureCardScroll(),
-                    SizedBox(height: 20),
-                    buildFavoritesSection(context),
-                  ],
-                ),
-              ),
-            ],
           ),
         ),
+        bottomNavigationBar: CustomNavigationBar(viewModel: NavigationViewModel()),
       ),
-      bottomNavigationBar: CustomNavigationBar(viewModel: NavigationViewModel()),
     );
   }
 
