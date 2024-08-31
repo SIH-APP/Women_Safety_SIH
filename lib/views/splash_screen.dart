@@ -1,7 +1,6 @@
+// splash_screen.dart
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:saahasini/views/home_screen.dart'; // For the timer
+import 'dart:async'; // For the timer
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -18,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     // Initialize the animation controller
     _controller = AnimationController(
-      duration: Duration(seconds: 3),
+      duration: Duration(seconds: 2),
       vsync: this,
     );
 
@@ -31,13 +30,10 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     // Start the animation
     _controller.forward();
 
-    // Navigate to home after 2 seconds
+    // Navigate to signup after 2 seconds
     Timer(Duration(seconds: 2), () {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => HomeScreen()),
-      );
+      Navigator.of(context).pushReplacementNamed('/signup');
     });
-
   }
 
   @override

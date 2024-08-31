@@ -1,3 +1,4 @@
+// signup_screen.dart
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
 import '../viewmodels/auth_viewmodel.dart';
@@ -169,10 +170,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       onPressed: () {
                         if (_formKey.currentState?.validate() ?? false) {
                           if (agreeToTerms) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => HomeScreen()),
-                            );
+                            Navigator.pushReplacementNamed(context, '/home');
                             // Handle sign-up logic
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(

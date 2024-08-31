@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:saahasini/viewmodels/auth_viewmodel.dart';
 import 'package:saahasini/views/SettingsScreen.dart';
 import 'package:saahasini/views/articleScreen.dart';
 import 'package:saahasini/views/home_screen.dart';
 import 'package:saahasini/views/notification_screen.dart';
+import 'package:saahasini/views/sign_in_screen.dart';
 import 'package:saahasini/views/splash_screen.dart';
 
 void main() {
@@ -17,10 +19,12 @@ class MyApp extends StatelessWidget {
       initialRoute: '/splash',
       routes: {
         '/splash': (context) => SplashScreen(),
-        '/home': (context) => SplashScreen(),
+        '/signup': (context) => SignUpScreen(viewModel: AuthViewModel()), // Add SignupScreen route
+        '/home': (context) => HomeScreen(),
+        '/call': (context) => CallPage(callID: "fake_call_${DateTime.now().millisecondsSinceEpoch}"),
         '/notifications': (context) => NotificationScreen(),
-        '/settings': (context) => SettingsScreen(), // Register the SettingsScreen
-        '/articles': (context) => ArticleScreen(), // Example, replace with your actual screen
+        '/settings': (context) => SettingsScreen(),
+        '/articles': (context) => ArticleScreen(),
       },
       theme: ThemeData(
         primarySwatch: Colors.red,

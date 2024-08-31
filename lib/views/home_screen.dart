@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 import '../viewmodels/navigation_viewmodel.dart';
 import 'live_tracking_screen.dart';
 import 'HomeViewModel.dart';
@@ -264,6 +265,16 @@ class HomeScreen extends StatelessWidget {
         ListTile(
           leading: Icon(Icons.phone, color: Colors.blue),
           title: Text('Fake call', style: TextStyle(color: Colors.white)),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CallPage(
+                  callID: "fake_call_${DateTime.now().millisecondsSinceEpoch}",
+                ),
+              ),
+            );
+          },
         ),
         ListTile(
           leading: Icon(Icons.feedback, color: Colors.redAccent),
@@ -275,5 +286,22 @@ class HomeScreen extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+class CallPage extends StatelessWidget {
+  const CallPage({Key? key, required this.callID}) : super(key: key);
+  final String callID;
+
+  @override
+  Widget build(BuildContext context) {
+    return ZegoUIKitPrebuiltCall(
+      appID: 1484647939,
+      appSign: '751874393a5ce84d7660387e93aabdd5f9be8e1faeaacd1ed95d9e199f6ec402',
+      userID: 'Fake Call',
+      userName: 'USER',
+      callID: callID,
+      config: ZegoUIKitPrebuiltCallConfig.oneOnOneVoiceCall(),
+    ); // ZegoUIKitPrebuiltCall
   }
 }
