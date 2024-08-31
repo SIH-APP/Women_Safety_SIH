@@ -267,7 +267,7 @@ class HomeScreen extends StatelessWidget {
         if (title == 'Siren') {
           _audioPlayer.play(AssetSource('audio/siren.mp3'));
         } else {
-          Navigator.pushNamed(context, '/call');
+          Navigator.pushNamed(context, '/spycam');
         }
       },
       child: Container(

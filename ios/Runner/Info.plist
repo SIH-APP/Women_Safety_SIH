@@ -3,6 +3,8 @@
 <plist version="1.0">
 <dict>
     <key>NSCameraUsageDescription</key>
+    <string>We need camera access to detect spy cameras.</string>
+    <key>NSCameraUsageDescription</key>
     <string>We require camera access to connect to a call</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>We require microphone access to connect to a call</string>
