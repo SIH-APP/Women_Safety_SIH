@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../viewmodels/navigation_viewmodel.dart';
@@ -323,20 +324,22 @@ class HomeScreen extends StatelessWidget {
         buildEmergencyListTile(
           context,
           icon: Icons.phone,
-          title: 'Call Ambulance 108',
-          onTap: () => _makePhoneCall('tel:108'),
+          title: 'Call Ambulance',
+          onTap: () =>
+              FlutterPhoneDirectCaller.callNumber('+919318440480')
+          ,
         ),
         buildEmergencyListTile(
           context,
           icon: Icons.local_police,
-          title: 'Call Police 100',
-          onTap: () => _makePhoneCall('tel:100'),
+          title: 'Call Police',
+          onTap: () => FlutterPhoneDirectCaller.callNumber('+919318440480'),
         ),
         buildEmergencyListTile(
           context,
           icon: Icons.contact_mail_rounded,
           title: 'Call Loved Ones',
-          onTap: () => _makePhoneCall('tel:+911234567890'), // Replace with actual number
+          onTap: () => FlutterPhoneDirectCaller.callNumber('+919318440480'), // Replace with actual number
         ),
       ],
     );

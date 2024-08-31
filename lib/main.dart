@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:saahasini/viewmodels/auth_viewmodel.dart';
 import 'package:saahasini/views/SettingsScreen.dart';
+import 'package:saahasini/views/Shake_Screen.dart';
 import 'package:saahasini/views/SpyCam.dart';
 import 'package:saahasini/views/articleScreen.dart';
 import 'package:saahasini/views/google_map_screen.dart'; // Import the new GoogleMapScreen
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         '/articles': (context) => ArticleScreen(),
         '/map': (context) => GoogleMapScreen(), // Add GoogleMapScreen route
         '/spycam': (context) => SpyCamDetector(), // Add SpyCamDetector route
+        '/shakeDemo': (context) => ShakeDemo(),
       },
       theme: ThemeData(
         primarySwatch: Colors.red,
