@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../viewmodels/navigation_viewmodel.dart';
-import 'LocationFetcherScreen.dart';
 import 'live_tracking_screen.dart';
 import 'HomeViewModel.dart';
 import 'custom_navigation_bar.dart';
@@ -95,19 +94,21 @@ class HomeScreen extends StatelessWidget {
                         title: 'Location',
                         onTap: () {
                           // Navigate to Location screen
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => LocationFetcherScreen()),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context) => LocationFetcherScreen()),
+                          // );
+                          Navigator.pushNamed(context, '/map');
                         },
                       ),
+
                       buildScrollableOption(
                         context,
                         title: 'Live Tracking',
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => LiveTrackingScreen()),
+                            MaterialPageRoute(builder: (context) => LocationPage()),
                           );
                         },
                       ),
@@ -117,7 +118,7 @@ class HomeScreen extends StatelessWidget {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => LiveTrackingScreen()),
+                            MaterialPageRoute(builder: (context) => LocationPage()),
                           );
                         },
                       ),

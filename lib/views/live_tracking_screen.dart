@@ -1,293 +1,181 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'BusStationCard.dart';
+import 'HospitalCard.dart';
+import 'PharmacyCard.dart';
+import 'PoliceStationCard.dart';
 
-class LiveTrackingScreen extends StatefulWidget {
+class LocationPage extends StatefulWidget {
   @override
-  _LiveTrackingScreenState createState() => _LiveTrackingScreenState();
+  _LocationPageState createState() => _LocationPageState();
 }
 
-class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
-  bool isLiveTrackingEnabled = false;
-  bool isGeolocationEnabled = false;
-  String currentLocation = 'Unknown';
-  Position? position;
+class _LocationPageState extends State<LocationPage> {
+  Position? _currentPosition;
+  bool _isLoading = false;
+
+  List<dynamic> _hospitalResults = [];
+  List<dynamic> _policeResults = [];
+  List<dynamic> _pharmacyResults = [];
+  List<dynamic> _busStationResults = [];
 
   @override
   void initState() {
     super.initState();
-    _getCurrentLocation();
+    _fetchCurrentLocation();
   }
 
-  Future<void> _getCurrentLocation() async {
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      await Geolocator.openLocationSettings();
-    }
+  Future<void> _fetchCurrentLocation() async {
+    setState(() {
+      _isLoading = true;
+    });
 
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return;
+    try {
+      bool serviceEnabled;
+      LocationPermission permission;
+
+      serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) {
+        return Future.error('Location services are disabled.');
       }
-    }
 
-    if (permission == LocationPermission.deniedForever) {
-      return;
-    }
+      permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          return Future.error('Location permissions are denied');
+        }
+      }
 
-    position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    setState(() {
-      currentLocation = 'Lat: ${position?.latitude}, Long: ${position?.longitude}';
-    });
+      if (permission == LocationPermission.deniedForever) {
+        return Future.error(
+            'Location permissions are permanently denied, we cannot request permissions.');
+      }
+
+      _currentPosition = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+
+      // Fetch places after obtaining the location
+      await _fetchAllNearbyPlaces();
+    } catch (e) {
+      print("Error fetching location: $e");
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 
-  void _toggleTrackingMode(bool isLiveTracking) {
-    setState(() {
-      isLiveTrackingEnabled = isLiveTracking;
-      isGeolocationEnabled = !isLiveTracking;
-    });
+  Future<void> _fetchAllNearbyPlaces() async {
+    if (_currentPosition != null) {
+      final latitude = _currentPosition!.latitude;
+      final longitude = _currentPosition!.longitude;
 
-    if (isGeolocationEnabled) {
-      _getCurrentLocation();
+      _hospitalResults = await _fetchPlacesForType(latitude, longitude, 'hospital');
+      _policeResults = await _fetchPlacesForType(latitude, longitude, 'police');
+      _pharmacyResults = await _fetchPlacesForType(latitude, longitude, 'pharmacy');
+      _busStationResults = await _fetchPlacesForType(latitude, longitude, 'bus_station');
+
+      setState(() {});
+    }
+  }
+
+  Future<List<dynamic>> _fetchPlacesForType(double latitude, double longitude, String type) async {
+    final apiKey = 'YOUR_GOOGLE_API_KEY';
+    final url =
+        'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$latitude,$longitude&radius=1500&type=$type&key=$apiKey';
+
+    try {
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        return data['results'];
+      } else {
+        print('Failed to load nearby $type');
+        return [];
+      }
+    } catch (e) {
+      print('Failed to fetch places for $type: $e');
+      return [];
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
+        title: Text(
+          'Nearby Services',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
         backgroundColor: Colors.black,
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.redAccent),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        title: Text(
-          'Live Tracking',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
+      body: Container(
+        decoration: BoxDecoration(
+          color: Colors.black
+        ),
+        child: _isLoading
+            ? Center(
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+          ),
+        )
+            : Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Text(
-                      'Select tracking mode',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                  Column(
-                    children: [
-                      Row(
-                        children: [
-                          Radio<bool>(
-                            value: true,
-                            groupValue: isLiveTrackingEnabled,
-                            onChanged: (value) {
-                              _toggleTrackingMode(true);
-                            },
-                            activeColor: Colors.redAccent,
-                          ),
-                          Text('Live Camera', style: TextStyle(color: Colors.white)),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Radio<bool>(
-                            value: false,
-                            groupValue: isLiveTrackingEnabled,
-                            onChanged: (value) {
-                              _toggleTrackingMode(false);
-                            },
-                            activeColor: Colors.redAccent,
-                          ),
-                          Text('Geolocation', style: TextStyle(color: Colors.white)),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
+              _buildServiceRow(
+                PoliceStationCard(
+                  key: UniqueKey(),
+                  openMapFunc: () => _openMapWithQuery('police', _policeResults),
+                ),
+                PharmacyCard(
+                  key: UniqueKey(),
+                  openMapFunc: () => _openMapWithQuery('pharmacy', _pharmacyResults),
+                ),
               ),
-              SizedBox(height: 20),
-              if (isLiveTrackingEnabled) ...[
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      // Handle action when camera feed is tapped
-                    },
-                    child: buildLiveCameraFeed(),
-                  ),
+              SizedBox(height: 30),
+              _buildServiceRow(
+                HospitalCard(
+                  key: UniqueKey(),
+                  openMapFunc: () => _openMapWithQuery('hospital', _hospitalResults),
                 ),
-              ] else if (isGeolocationEnabled) ...[
-                Expanded(
-                  child: buildGeolocationWidget(),
+                BusStationCard(
+                  key: UniqueKey(),
+                  openMapFunc: () => _openMapWithQuery('bus_station', _busStationResults),
                 ),
-              ],
+              ),
             ],
           ),
         ),
       ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
-        child: FloatingActionButton(
-          backgroundColor: Colors.redAccent,
-          child: Text('SOS', style: TextStyle(fontWeight: FontWeight.bold)),
-          onPressed: () {
-            // Handle SOS button press
-          },
-        ),
-      ),
     );
   }
 
-  Widget buildLiveCameraFeed() {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        image: DecorationImage(
-          image: AssetImage('assets/images/traffic_camera_feed.png'), // Placeholder image
-          fit: BoxFit.cover,
-          colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.3),
-            BlendMode.darken,
-          ),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.7),
-            offset: Offset(0, 8),
-            blurRadius: 20,
-          ),
-        ],
-      ),
-      child: Stack(
-        children: [
-          Positioned(
-            top: 10,
-            left: 10,
-            child: Row(
-              children: [
-                Icon(Icons.camera, color: Colors.white),
-                SizedBox(width: 5),
-                Text('Cam 01', style: TextStyle(color: Colors.white)),
-                SizedBox(width: 20),
-                Icon(Icons.location_on, color: Colors.white),
-                SizedBox(width: 5),
-                Text('Kollamring', style: TextStyle(color: Colors.white)),
-              ],
-            ),
-          ),
-          Positioned(
-            top: 10,
-            right: 10,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                color: Colors.redAccent,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.redAccent.withOpacity(0.5),
-                    offset: Offset(0, 2),
-                    blurRadius: 8,
-                  ),
-                ],
-              ),
-              child: Text(
-                'Live',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 10,
-            left: 10,
-            right: 10,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ElevatedButton.icon(
-                  onPressed: () {
-                    // Handle fullscreen toggle
-                  },
-                  icon: Icon(Icons.fullscreen, color: Colors.white),
-                  label: Text('Fullscreen'),
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white, backgroundColor: Colors.white.withOpacity(0.2),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    // Handle change camera
-                  },
-                  icon: Icon(Icons.switch_camera, color: Colors.white),
-                  label: Text('Switch Camera'),
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white, backgroundColor: Colors.white.withOpacity(0.2),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+  Widget _buildServiceRow(Widget firstCard, Widget secondCard) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(child: firstCard),
+        SizedBox(width: 20),
+        Expanded(child: secondCard),
+      ],
     );
   }
 
-  Widget buildGeolocationWidget() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.location_on, color: Colors.redAccent, size: 100),
-          SizedBox(height: 20),
-          Text(
-            'Current Location:',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 10),
-          Text(
-            currentLocation,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-            ),
-          ),
-        ],
-      ),
-    );
+  Future<void> _openMapWithQuery(String query, List<dynamic> results) async {
+    if (results.isEmpty) {
+      print("No results found for $query.");
+      return;
+    }
+
+    // Handle the results here
+    // You can navigate to a new screen to display these results or show on a map.
+    print("Results for $query: $results");
   }
 }

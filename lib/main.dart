@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:saahasini/viewmodels/auth_viewmodel.dart';
 import 'package:saahasini/views/SettingsScreen.dart';
 import 'package:saahasini/views/articleScreen.dart';
+import 'package:saahasini/views/google_map_screen.dart'; // Import the new GoogleMapScreen
 import 'package:saahasini/views/home_screen.dart';
 import 'package:saahasini/views/notification_screen.dart';
 import 'package:saahasini/views/sign_in_screen.dart';
@@ -19,12 +20,13 @@ class MyApp extends StatelessWidget {
       initialRoute: '/splash',
       routes: {
         '/splash': (context) => SplashScreen(),
-        '/signup': (context) => SignUpScreen(viewModel: AuthViewModel()), // Add SignupScreen route
+        '/signup': (context) => SignUpScreen(viewModel: AuthViewModel()),
         '/home': (context) => HomeScreen(),
         '/call': (context) => CallPage(callID: "fake_call_${DateTime.now().millisecondsSinceEpoch}"),
         '/notifications': (context) => NotificationScreen(),
         '/settings': (context) => SettingsScreen(),
         '/articles': (context) => ArticleScreen(),
+        '/map': (context) => GoogleMapScreen(), // Add GoogleMapScreen route
       },
       theme: ThemeData(
         primarySwatch: Colors.red,
