@@ -67,6 +67,26 @@ class ArticleScreen extends StatelessWidget {
                 32,
                 300,
               ),
+              SizedBox(height: 10),
+
+              buildArticleCard(
+                context,
+                'Kolkata rape case: India\'s top court stays abortion for rape survivor',
+                'India\'s top court has ruled that a rape survivor must bear her child after she...',
+                'assets/images/article_image_3.png',
+                32,
+                300,
+              ),
+              SizedBox(height: 10),
+
+              buildArticleCard(
+                context,
+                'Kolkata rape case: India\'s top court stays abortion for rape survivor',
+                'India\'s top court has ruled that a rape survivor must bear her child after she...',
+                'assets/images/article_image_3.png',
+                32,
+                300,
+              ),
             ],
           ),
         ),
