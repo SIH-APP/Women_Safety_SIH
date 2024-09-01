@@ -31,11 +31,12 @@ dependencies:
   flutter:
     sdk: flutter
   provider: ^6.0.0
+  webview_flutter: ^4.0.0
   font_awesome_flutter: ^10.3.0
   another_flushbar: ^1.10.24
   url_launcher: ^6.0.20
   google_maps_flutter: ^2.1.4
-  http: ^1.2.2
+
   sensors_plus: ^2.0.2
   camera: ^0.9.4+5
   path_provider: ^2.0.11
@@ -45,8 +46,9 @@ dependencies:
   flutter_foreground_task: ^8.6.0
   vibration: ^1.7.4
   flutter_phone_direct_caller: ^2.1.1
-
-
+  http: ^0.13.6  # or the latest compatible version
+  flutter_map: ^0.14.0
+  latlong2: ^0.8.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -73,6 +75,10 @@ flutter:
   assets:
     - assets/images/
     - assets/audio/
+    - assets/greater_noida_crime_hotspots.json
+    - assets/greater_noida_crime_map.html
+    - assets/audio/audio.mp3
+    - assets/audio/siren.mp3
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

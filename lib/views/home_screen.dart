@@ -4,9 +4,11 @@ import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../viewmodels/navigation_viewmodel.dart';
+import 'CrimeMapPage.dart';
 import 'live_tracking_screen.dart';
 import 'HomeViewModel.dart';
 import 'custom_navigation_bar.dart';
+import 'map_page.dart';
 
 class HomeScreen extends StatelessWidget {
   final HomeViewModel viewModel = HomeViewModel();
@@ -118,13 +120,16 @@ class HomeScreen extends StatelessWidget {
                           // Handle Screaming screen navigation or action
                         },
                       ),
-                      buildScrollableOption(
-                        context,
-                        title: 'Screaming',
-                        onTap: () {
-                          // Handle Screaming screen navigation or action
-                        },
-                      ),
+                      // buildScrollableOption(
+                      //   context,
+                      //   title: 'Crime Map',
+                      //   onTap: () {
+                      //     Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(builder: (context) => CrimeMapPage()),
+                      //     );
+                      //   },
+                      // ),
                     ],
                   ),
                 ),
@@ -269,18 +274,19 @@ class HomeScreen extends StatelessWidget {
 
   Widget buildFeatureCard(String title, String imagePath, BuildContext context) {
     return InkWell(
-      onTap: () {
+      onTap: () async {
         if (title == 'Siren') {
-          _audioPlayer.play(AssetSource('audio/siren.mp3'));
+          await _audioPlayer.play(AssetSource('audio/siren.mp3'));
         }
-        if(title =='Fake Call'){
+        if (title == 'Fake Call') {
+          // Play a sound, wait for 3 seconds, then navigate to the call screen
+          await _audioPlayer.play(AssetSource('audio/audio.mp3'));
+          await Future.delayed(Duration(seconds: 2));
           Navigator.pushNamed(context, '/call');
-
         }
-        if(title =='Camera Detector'){
+        if (title == 'Camera Detector') {
           Navigator.pushNamed(context, '/spycam');
         }
-
       },
       child: Container(
         width: 150,
@@ -351,8 +357,7 @@ class HomeScreen extends StatelessWidget {
           icon: Icons.phone,
           title: 'Call Ambulance',
           onTap: () =>
-              FlutterPhoneDirectCaller.callNumber('+919318440480')
-          ,
+              FlutterPhoneDirectCaller.callNumber('+919318440480'),
         ),
         buildEmergencyListTile(
           context,

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_024bad962494cef454104ce3f3d1b60f {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_024bad962494cef454104ce3f3d1b60f" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_024bad962494cef454104ce3f3d1b60f = L.map(
+                "map_024bad962494cef454104ce3f3d1b60f",
+                {
+                    center: [28.474387, 77.50399],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 13,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_3012b89b24440151cb2d630f2effb96c = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_024bad962494cef454104ce3f3d1b60f);
+        
+    
+            var marker_d0d549929d1f50121c87d0741c1fccb1 = L.marker(
+                [28.474387, 77.50399],
+                {}
+            ).addTo(map_024bad962494cef454104ce3f3d1b60f);
+        
+    
+            var icon_5a0bfcef20e371ae6d7eb853144bfc38 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_d0d549929d1f50121c87d0741c1fccb1.setIcon(icon_5a0bfcef20e371ae6d7eb853144bfc38);
+        
+    
+        var popup_e1d5f0dbdafb4a04ef9c53da13153455 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_8a0cb0e8775c0ac1f306c88689069290 = $(`<div id="html_8a0cb0e8775c0ac1f306c88689069290" style="width: 100.0%; height: 100.0%;">Location: Pari Chowk<br>Crime Type: Eve Teasing<br>Crime Frequency: 25<br>Risk Level: High</div>`)[0];
+            popup_e1d5f0dbdafb4a04ef9c53da13153455.setContent(html_8a0cb0e8775c0ac1f306c88689069290);
+        
+
+        marker_d0d549929d1f50121c87d0741c1fccb1.bindPopup(popup_e1d5f0dbdafb4a04ef9c53da13153455)
+        ;
+
+        
+    
+    
+            var marker_acddefa6417e51b494b5fb57d18839c3 = L.marker(
+                [28.471995, 77.497316],
+                {}
+            ).addTo(map_024bad962494cef454104ce3f3d1b60f);
+        
+    
+            var icon_42be6f31342defda7bc689f3e8f9045e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_acddefa6417e51b494b5fb57d18839c3.setIcon(icon_42be6f31342defda7bc689f3e8f9045e);
+        
+    
+        var popup_8fd08e2b5af0dce5a140a9038b25f31a = L.popup({"maxWidth": "100%"});
+
+        
+            var html_c85af7a36e598528312f1ebd62d0f22f = $(`<div id="html_c85af7a36e598528312f1ebd62d0f22f" style="width: 100.0%; height: 100.0%;">Location: Alpha Commercial Belt<br>Crime Type: Robbery<br>Crime Frequency: 15<br>Risk Level: Medium</div>`)[0];
+            popup_8fd08e2b5af0dce5a140a9038b25f31a.setContent(html_c85af7a36e598528312f1ebd62d0f22f);
+        
+
+        marker_acddefa6417e51b494b5fb57d18839c3.bindPopup(popup_8fd08e2b5af0dce5a140a9038b25f31a)
+        ;
+
+        
+    
+    
+            var marker_496820edcb1cbf8ea891fbcc9448eaa9 = L.marker(
+                [28.46979, 77.503097],
+                {}
+            ).addTo(map_024bad962494cef454104ce3f3d1b60f);
+        
+    
+            var icon_9ed11ce18a1d13c69b886ca14b0bedf1 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_496820edcb1cbf8ea891fbcc9448eaa9.setIcon(icon_9ed11ce18a1d13c69b886ca14b0bedf1);
+        
+    
+        var popup_5b02a04ed21140be4bd1d0ce34bf00e3 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_a432bb02e7ed539cd4e81a612d20226f = $(`<div id="html_a432bb02e7ed539cd4e81a612d20226f" style="width: 100.0%; height: 100.0%;">Location: Knowledge Park III<br>Crime Type: Assault<br>Crime Frequency: 30<br>Risk Level: High</div>`)[0];
+            popup_5b02a04ed21140be4bd1d0ce34bf00e3.setContent(html_a432bb02e7ed539cd4e81a612d20226f);
+        
+
+        marker_496820edcb1cbf8ea891fbcc9448eaa9.bindPopup(popup_5b02a04ed21140be4bd1d0ce34bf00e3)
+        ;
+
+        
+    
+    
+            var marker_0c5dc0c47c810bed47367cd47c022a2a = L.marker(
+                [28.475367, 77.495869],
+                {}
+            ).addTo(map_024bad962494cef454104ce3f3d1b60f);
+        
+    
+            var icon_d111b0fd6100a13ac0f84d05fbcaac5a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_0c5dc0c47c810bed47367cd47c022a2a.setIcon(icon_d111b0fd6100a13ac0f84d05fbcaac5a);
+        
+    
+        var popup_2c6963bce7d23b76d8cfe74cdcddb85c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_69cc3d4f17aee73616325e3e7e1851f1 = $(`<div id="html_69cc3d4f17aee73616325e3e7e1851f1" style="width: 100.0%; height: 100.0%;">Location: Gamma 1 Market<br>Crime Type: Eve Teasing<br>Crime Frequency: 10<br>Risk Level: Medium</div>`)[0];
+            popup_2c6963bce7d23b76d8cfe74cdcddb85c.setContent(html_69cc3d4f17aee73616325e3e7e1851f1);
+        
+
+        marker_0c5dc0c47c810bed47367cd47c022a2a.bindPopup(popup_2c6963bce7d23b76d8cfe74cdcddb85c)
+        ;
+
+        
+    
+    
+            var marker_84461130d3db6a5489f19a05b8a3d44c = L.marker(
+                [28.495533, 77.495836],
+                {}
+            ).addTo(map_024bad962494cef454104ce3f3d1b60f);
+        
+    
+            var icon_a57c82f3e06b70174a3efd54d53a7c1b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_84461130d3db6a5489f19a05b8a3d44c.setIcon(icon_a57c82f3e06b70174a3efd54d53a7c1b);
+        
+    
+        var popup_0821d10ce68813147ca2c4012f038766 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d73eb85b01e32c09c6f72d7eb8626f7d = $(`<div id="html_d73eb85b01e32c09c6f72d7eb8626f7d" style="width: 100.0%; height: 100.0%;">Location: Surajpur Industrial Area<br>Crime Type: Robbery<br>Crime Frequency: 8<br>Risk Level: Low</div>`)[0];
+            popup_0821d10ce68813147ca2c4012f038766.setContent(html_d73eb85b01e32c09c6f72d7eb8626f7d);
+        
+
+        marker_84461130d3db6a5489f19a05b8a3d44c.bindPopup(popup_0821d10ce68813147ca2c4012f038766)
+        ;
+
+        
+    
+    
+            var marker_e17e5aa3680d2c372524fe976320be94 = L.marker(
+                [28.626522, 77.375109],
+                {}
+            ).addTo(map_024bad962494cef454104ce3f3d1b60f);
+        
+    
+            var icon_d3b4ab118fdc5bb376ef4f22706ecfdd = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_e17e5aa3680d2c372524fe976320be94.setIcon(icon_d3b4ab118fdc5bb376ef4f22706ecfdd);
+        
+    
+        var popup_6bdb2948f07b3933828df87392cda028 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_7158f20c7bc5363060c5b71643ca0756 = $(`<div id="html_7158f20c7bc5363060c5b71643ca0756" style="width: 100.0%; height: 100.0%;">Location: Sector 62 Metro Station<br>Crime Type: Harassment<br>Crime Frequency: 20<br>Risk Level: High</div>`)[0];
+            popup_6bdb2948f07b3933828df87392cda028.setContent(html_7158f20c7bc5363060c5b71643ca0756);
+        
+
+        marker_e17e5aa3680d2c372524fe976320be94.bindPopup(popup_6bdb2948f07b3933828df87392cda028)
+        ;
+
+        
+    
+    
+            var marker_b671c708ed92767ea20786e04f536bd0 = L.marker(
+                [28.451684, 77.518497],
+                {}
+            ).addTo(map_024bad962494cef454104ce3f3d1b60f);
+        
+    
+            var icon_0a935d51ae42c9551ace216cafd43147 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_b671c708ed92767ea20786e04f536bd0.setIcon(icon_0a935d51ae42c9551ace216cafd43147);
+        
+    
+        var popup_c3b4cd23ffd5242720a01ea8609b5006 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_bebc8e4b7499e86b4656833978ab6c50 = $(`<div id="html_bebc8e4b7499e86b4656833978ab6c50" style="width: 100.0%; height: 100.0%;">Location: Jaypee Greens<br>Crime Type: Kidnapping<br>Crime Frequency: 5<br>Risk Level: Low</div>`)[0];
+            popup_c3b4cd23ffd5242720a01ea8609b5006.setContent(html_bebc8e4b7499e86b4656833978ab6c50);
+        
+
+        marker_b671c708ed92767ea20786e04f536bd0.bindPopup(popup_c3b4cd23ffd5242720a01ea8609b5006)
+        ;
+
+        
+    
+    
+            var marker_77e9ac207dec4ee59706b6fe47a55ab5 = L.marker(
+                [28.475963, 77.507313],
+                {}
+            ).addTo(map_024bad962494cef454104ce3f3d1b60f);
+        
+    
+            var icon_6463ec15951c7880ae173235f1d701b9 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_77e9ac207dec4ee59706b6fe47a55ab5.setIcon(icon_6463ec15951c7880ae173235f1d701b9);
+        
+    
+        var popup_2e4812285a594a5e9331628e5f755d2e = L.popup({"maxWidth": "100%"});
+
+        
+            var html_83baeccce3e2c103b1d78acb977223df = $(`<div id="html_83baeccce3e2c103b1d78acb977223df" style="width: 100.0%; height: 100.0%;">Location: Jagat Farm<br>Crime Type: Eve Teasing<br>Crime Frequency: 18<br>Risk Level: High</div>`)[0];
+            popup_2e4812285a594a5e9331628e5f755d2e.setContent(html_83baeccce3e2c103b1d78acb977223df);
+        
+
+        marker_77e9ac207dec4ee59706b6fe47a55ab5.bindPopup(popup_2e4812285a594a5e9331628e5f755d2e)
+        ;
+
+        
+    
+    
+            var marker_988fd4e098b577d6397a75a2c2d6fa15 = L.marker(
+                [28.459545, 77.50934],
+                {}
+            ).addTo(map_024bad962494cef454104ce3f3d1b60f);
+        
+    
+            var icon_56e03155165e1a83e4544c4457aeb271 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_988fd4e098b577d6397a75a2c2d6fa15.setIcon(icon_56e03155165e1a83e4544c4457aeb271);
+        
+    
+        var popup_0f5579d686bed719d34ab797247ec5a4 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_194ece0aee0965f38adfe191f9ba320d = $(`<div id="html_194ece0aee0965f38adfe191f9ba320d" style="width: 100.0%; height: 100.0%;">Location: Noida International University<br>Crime Type: Harassment<br>Crime Frequency: 12<br>Risk Level: Medium</div>`)[0];
+            popup_0f5579d686bed719d34ab797247ec5a4.setContent(html_194ece0aee0965f38adfe191f9ba320d);
+        
+
+        marker_988fd4e098b577d6397a75a2c2d6fa15.bindPopup(popup_0f5579d686bed719d34ab797247ec5a4)
+        ;
+
+        
+    
+    
+            var marker_611c2349bb35f043275ac04c682f3ca0 = L.marker(
+                [28.462595, 77.493112],
+                {}
+            ).addTo(map_024bad962494cef454104ce3f3d1b60f);
+        
+    
+            var icon_25c412735b7d525880f01ec144a8798c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_611c2349bb35f043275ac04c682f3ca0.setIcon(icon_25c412735b7d525880f01ec144a8798c);
+        
+    
+        var popup_64dafdccf55c730cf90de977a53a49c9 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_114345bec52d711df8e001f7e4e3f02b = $(`<div id="html_114345bec52d711df8e001f7e4e3f02b" style="width: 100.0%; height: 100.0%;">Location: Delta 1 Park<br>Crime Type: Assault<br>Crime Frequency: 22<br>Risk Level: High</div>`)[0];
+            popup_64dafdccf55c730cf90de977a53a49c9.setContent(html_114345bec52d711df8e001f7e4e3f02b);
+        
+
+        marker_611c2349bb35f043275ac04c682f3ca0.bindPopup(popup_64dafdccf55c730cf90de977a53a49c9)
+        ;
+
+        
+    
+    
+            var marker_52dc278da3bc22c97d0fad8eaf4fd827 = L.marker(
+                [28.472653, 77.503113],
+                {}
+            ).addTo(map_024bad962494cef454104ce3f3d1b60f);
+        
+    
+            var icon_40e8130da363591d73f469193fec4b35 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_52dc278da3bc22c97d0fad8eaf4fd827.setIcon(icon_40e8130da363591d73f469193fec4b35);
+        
+    
+        var popup_0e037ea68eba04ef2e94e329c0448b56 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_f7c7513a0366e7fead633c685ceb1d2c = $(`<div id="html_f7c7513a0366e7fead633c685ceb1d2c" style="width: 100.0%; height: 100.0%;">Location: Kasna Road<br>Crime Type: Robbery<br>Crime Frequency: 14<br>Risk Level: Medium</div>`)[0];
+            popup_0e037ea68eba04ef2e94e329c0448b56.setContent(html_f7c7513a0366e7fead633c685ceb1d2c);
+        
+
+        marker_52dc278da3bc22c97d0fad8eaf4fd827.bindPopup(popup_0e037ea68eba04ef2e94e329c0448b56)
+        ;
+
+        
+    
+    
+            var marker_9224ccf68126fd73b4784d4dcd1df087 = L.marker(
+                [28.462092, 77.536215],
+                {}
+            ).addTo(map_024bad962494cef454104ce3f3d1b60f);
+        
+    
+            var icon_9b4f23a1f53f3cd60f0486ecf591152b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_9224ccf68126fd73b4784d4dcd1df087.setIcon(icon_9b4f23a1f53f3cd60f0486ecf591152b);
+        
+    
+        var popup_9c268ad15a83091a77397a88dd0cf613 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_14d7a5f63c0ee8bce46247d9e0648161 = $(`<div id="html_14d7a5f63c0ee8bce46247d9e0648161" style="width: 100.0%; height: 100.0%;">Location: Galgotias University<br>Crime Type: Eve Teasing<br>Crime Frequency: 6<br>Risk Level: Low</div>`)[0];
+            popup_9c268ad15a83091a77397a88dd0cf613.setContent(html_14d7a5f63c0ee8bce46247d9e0648161);
+        
+
+        marker_9224ccf68126fd73b4784d4dcd1df087.bindPopup(popup_9c268ad15a83091a77397a88dd0cf613)
+        ;
+
+        
+    
+    
+            var marker_85bef1621d650cfc5c6b2003cc9b9fe3 = L.marker(
+                [28.52474, 77.558791],
+                {}
+            ).addTo(map_024bad962494cef454104ce3f3d1b60f);
+        
+    
+            var icon_e3be0cd68f235c34a754e217b1acd258 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_85bef1621d650cfc5c6b2003cc9b9fe3.setIcon(icon_e3be0cd68f235c34a754e217b1acd258);
+        
+    
+        var popup_87f9e3e744230a1be9a89836a15440ed = L.popup({"maxWidth": "100%"});
+
+        
+            var html_58858a6f30c85d83b5a88e7e32a4c4a3 = $(`<div id="html_58858a6f30c85d83b5a88e7e32a4c4a3" style="width: 100.0%; height: 100.0%;">Location: Bennett University<br>Crime Type: Harassment<br>Crime Frequency: 9<br>Risk Level: Medium</div>`)[0];
+            popup_87f9e3e744230a1be9a89836a15440ed.setContent(html_58858a6f30c85d83b5a88e7e32a4c4a3);
+        
+
+        marker_85bef1621d650cfc5c6b2003cc9b9fe3.bindPopup(popup_87f9e3e744230a1be9a89836a15440ed)
+        ;
+
+        
+    
+</script>
+</html>
