@@ -117,6 +117,9 @@ class HomeScreen extends StatelessWidget {
                         context,
                         title: 'Crime map',
                         onTap: () {
+
+                          
+
                           // Handle Screaming screen navigation or action
                         },
                       ),
