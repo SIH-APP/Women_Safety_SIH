@@ -83,7 +83,7 @@ class _LocationPageState extends State<LocationPage> {
   }
 
   Future<List<dynamic>> _fetchPlacesForType(double latitude, double longitude, String type) async {
-    final apiKey = 'AIzaSyA6UUZunEH12V49__hjo-yfdc8YAC-_oKg';
+    final apiKey = 'YOUR_GOOGLE_API_KEY';
     final url =
         'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$latitude,$longitude&radius=1500&type=$type&key=$apiKey';
 
