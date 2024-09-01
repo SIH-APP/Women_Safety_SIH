@@ -110,8 +110,8 @@ class CustomNavigationBar extends StatelessWidget {
       ),
     );
   }
-<<<<<<< Updated upstream
+// <<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes
+// =======
+
+// >>>>>>> Stashed changes

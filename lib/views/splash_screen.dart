@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     // Navigate to signup after 2 seconds
     Timer(Duration(seconds: 2), () {
-      Navigator.of(context).pushReplacementNamed('/signup');
+      Navigator.of(context).pushReplacementNamed('/onboard');
     });
   }
 

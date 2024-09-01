@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import '../viewmodels/onboarding_viewmodel.dart';
 import '../widgets/onboarding_page_widget.dart';
-import 'custom_navigation_bar.dart';
 
 class OnboardingScreen extends StatefulWidget {
   final OnboardingViewModel viewModel;
-  final VoidCallback onComplete;  // Add this callback
+  final VoidCallback onComplete;  // Callback to handle completion of onboarding
 
   OnboardingScreen({required this.viewModel, required this.onComplete});
 
@@ -71,13 +70,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   IconButton(
                     icon: Icon(Icons.arrow_forward, color: Colors.redAccent),
                     onPressed: () {
+                      Navigator.pushReplacementNamed(context, '/signup');
                       if (_currentPage < widget.viewModel.onboardingPages.length - 1) {
                         _pageController.nextPage(
+
                           duration: Duration(milliseconds: 300),
                           curve: Curves.easeIn,
                         );
                       } else {
-                        widget.onComplete();  // Complete onboarding and navigate to home screen
+                        widget.onComplete();  // Complete onboarding and navigate to sign up screen
                       }
                     },
                   ),

@@ -192,6 +192,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           borderRadius: BorderRadius.circular(30),
                         ),
                       ),
+
                       onPressed: () {
                         if (_formKey.currentState?.validate() ?? false) {
                           if (agreeToTerms) {
