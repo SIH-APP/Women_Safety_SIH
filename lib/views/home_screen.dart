@@ -115,7 +115,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       buildScrollableOption(
                         context,
-                        title: 'Screaming',
+                        title: 'Crime map',
                         onTap: () {
                           // Handle Screaming screen navigation or action
                         },
@@ -357,13 +357,13 @@ class HomeScreen extends StatelessWidget {
           icon: Icons.phone,
           title: 'Call Ambulance',
           onTap: () =>
-              FlutterPhoneDirectCaller.callNumber('+919318440480'),
+              FlutterPhoneDirectCaller.callNumber('108'),
         ),
         buildEmergencyListTile(
           context,
           icon: Icons.local_police,
           title: 'Call Police',
-          onTap: () => FlutterPhoneDirectCaller.callNumber('+919318440480'),
+          onTap: () => FlutterPhoneDirectCaller.callNumber('100'),
         ),
         buildEmergencyListTile(
           context,
