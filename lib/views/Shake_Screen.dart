@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shake/shake.dart';
+import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:vibration/vibration.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
@@ -21,6 +22,12 @@ class _ShakeDemoState extends State<ShakeDemo> with SingleTickerProviderStateMix
       vsync: this,
       duration: Duration(seconds: 1),
     )..repeat(reverse: true);
+
+    // Initialize the foreground task service
+    FlutterForegroundTask.startService(
+      notificationTitle: 'Shake Detection Service',
+      notificationText: 'Running in background...',
+    );
 
     // Start shake detection
     detector = ShakeDetector.autoStart(
@@ -59,6 +66,7 @@ class _ShakeDemoState extends State<ShakeDemo> with SingleTickerProviderStateMix
   @override
   void dispose() {
     detector?.stopListening();
+    FlutterForegroundTask.stopService();
     _animationController?.dispose();
     super.dispose();
   }
@@ -70,6 +78,14 @@ class _ShakeDemoState extends State<ShakeDemo> with SingleTickerProviderStateMix
       appBar: AppBar(
         title: Text('Shake Detection Demo'),
         backgroundColor: Colors.blueGrey[700],
+        actions: [
+          IconButton(
+            icon: Icon(Icons.call),
+            onPressed: () {
+              _makeDirectPhoneCall('122333333322'); // Trigger a direct call when the icon is pressed
+            },
+          ),
+        ],
       ),
       body: Center(
         child: Column(
